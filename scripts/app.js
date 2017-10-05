@@ -1,5 +1,6 @@
 var STRINGS = {
-    'view-more': "View More"
+    'view-more': 'View More',
+    'currency': 'BGN'
 }
 
 var ItemEntity = React.createClass({
@@ -13,9 +14,9 @@ var ItemEntity = React.createClass({
         return (
             React.createElement('li', { className: 'item' },
                 React.createElement('h2', { className: 'item-name' }, this.props.name),
-                React.createElement('a', { href: '/' + this.props.id, className: 'item-link' }, STRINGS['view-more']),
+                React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']),
                 React.createElement('div', { className: 'item-description' }, this.props.description),
-                React.createElement('div', { className: 'item-price' }, this.props.price)
+                React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency'])
             )
         );
     }
@@ -45,10 +46,10 @@ var ItemsList = React.createClass({
  * Data
  */
 var items = [
-    { key: 1, name: "Mobile Phone", description: "Front-end Unicorn", price: '750' },
-    { key: 2, name: "Jacket", description: "Front-end Unicorn", price: '75' },
-    { key: 3, name: "Car", description: "Front-end Unicorn", price: '7750' },
-    { key: 4, name: "Watch", description: "Front-end Unicorn", price: '110' },
+    { id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: '750' },
+    { id: 2, name: "Jacket", description: "Brand new jacket", price: '75.50' },
+    { id: 3, name: "Car", description: "Brand new car", price: '7750' },
+    { id: 4, name: "Watch", description: "Brand new watch", price: '110.99' },
 ];
 
 ReactDOM.render(
