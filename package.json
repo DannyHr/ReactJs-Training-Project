@@ -1,0 +1,13 @@
+{
+  "name": "ReactJs-Training-Project",
+  "version": "1.0.0",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0"
+  },
+  "license": "GPL"
+}
