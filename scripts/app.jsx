@@ -1,11 +1,9 @@
 var STRINGS = {
     'view-more': 'View More',
     'currency': 'BGN'
-};
+}
 
 var ItemEntity = React.createClass({
-    displayName: 'ItemEntity',
-
     propTypes: {
         id: React.PropTypes.number.isRequired,
         name: React.PropTypes.string.isRequired,
@@ -13,44 +11,67 @@ var ItemEntity = React.createClass({
         price: React.PropTypes.number.isRequired
     },
     render: function () {
-        return React.createElement('h2', { className: 'item-name' }, this.props.name), React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']), React.createElement('div', { className: 'item-description' }, this.props.description), React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency']);
+        return (
+            React.createElement('h2', { className: 'item-name' }, this.props.name),
+            React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']),
+            React.createElement('div', { className: 'item-description' }, this.props.description),
+            React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency'])
+        );
     }
 });
 
 var ItemsList = React.createClass({
-    displayName: 'ItemsList',
-
     propTypes: {
         items: React.PropTypes.object.isRequired
     },
     render: function () {
         var elementsToRender = this.props.items.map(function (item) {
-            return React.createElement('li', { className: 'item' }, React.createElement(ItemEntity, item));
+            return (
+                React.createElement('li', { className: 'item' },
+                    React.createElement(ItemEntity, item)
+                )
+            );
         });
 
-        return React.createElement('div', { className: 'items-list-container' }, React.createElement('ul', { className: 'items-list' }, elementsToRender));
+        return (
+            React.createElement('div', { className: 'items-list-container' },
+                React.createElement('ul', { className: 'items-list' }, elementsToRender)
+            )
+        );
     }
 });
 
 var ItemPreviewScreen = React.createClass({
-    displayName: 'ItemPreviewScreen',
-
     propTypes: {
         item: React.PropTypes.object.isRequired
     },
     render: function () {
-        return React.createElement('div', { className: 'item-preview-screen fullscreen-popup' }, React.createElement(ItemEntity, this.props.item));
+        return (
+            React.createElement('div', { className: 'item-preview-screen fullscreen-popup' },
+                React.createElement(ItemEntity, this.props.item)
+            )
+        );
     }
 });
+
 
 /**
  * Data
  */
-var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: '750' }, { id: 2, name: "Jacket", description: "Brand new jacket", price: '75.50' }, { id: 3, name: "Car", description: "Brand new car", price: '7750' }, { id: 4, name: "Watch", description: "Brand new watch", price: '110.99' }];
+var items = [
+    { id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: '750' },
+    { id: 2, name: "Jacket", description: "Brand new jacket", price: '75.50' },
+    { id: 3, name: "Car", description: "Brand new car", price: '7750' },
+    { id: 4, name: "Watch", description: "Brand new watch", price: '110.99' },
+];
 
-ReactDOM.render(React.createElement(ItemsList, {
-    items: items
-}), document.getElementById('react-app'));
+ReactDOM.render(
+    React.createElement(ItemsList, {
+        items: items
+    }),
+    document.getElementById('react-app')
+);
+
 
 // var ContactItem = React.createClass({
 //     propTypes: {
