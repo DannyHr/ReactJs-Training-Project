@@ -2,7 +2,11 @@
   "name": "ReactJs-Training-Project",
   "version": "1.0.0",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "create-react-class": "^15.6.2",
+    "gulp": "^3.9.1",
+    "prop-types": "^15.6.0",
+    "react": "16.0.0",
+    "react-dom": "16.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

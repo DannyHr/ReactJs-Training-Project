@@ -1,42 +1,72 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var STRINGS = {
     'view-more': 'View More',
     'currency': 'BGN'
 };
 
-var ItemEntity = React.createClass({
+var ItemEntity = createReactClass({
     displayName: 'ItemEntity',
 
     propTypes: {
-        id: React.PropTypes.number.isRequired,
-        name: React.PropTypes.string.isRequired,
-        description: React.PropTypes.string,
-        price: React.PropTypes.number.isRequired
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        price: PropTypes.number.isRequired
     },
     render: function () {
-        return React.createElement('h2', { className: 'item-name' }, this.props.name), React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']), React.createElement('div', { className: 'item-description' }, this.props.description), React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency']);
+        return React.createElement(
+            'li',
+            { className: 'item' },
+            React.createElement(
+                'h2',
+                { className: 'item-name' },
+                this.props.name
+            ),
+            React.createElement(
+                'div',
+                { className: 'item-description' },
+                this.props.description
+            ),
+            React.createElement(
+                'div',
+                { className: 'item-price' },
+                this.props.price + ' ' + STRINGS['currency']
+            ),
+            React.createElement(
+                'a',
+                { href: 'products/' + this.props.id, className: 'item-link' },
+                STRINGS['view-more']
+            )
+        );
     }
 });
 
-var ItemsList = React.createClass({
+var ItemsList = createReactClass({
     displayName: 'ItemsList',
 
     propTypes: {
-        items: React.PropTypes.object.isRequired
+        items: PropTypes.array.isRequired
     },
     render: function () {
         var elementsToRender = this.props.items.map(function (item) {
-            return React.createElement('li', { className: 'item' }, React.createElement(ItemEntity, item));
+            return React.createElement(ItemEntity, _extends({}, item, { key: item.id.toString() }))
+
+            // React.createElement('li', { className: 'item' },
+            //     React.createElement(ItemEntity, item)
+            // )
+            ;
         });
 
         return React.createElement('div', { className: 'items-list-container' }, React.createElement('ul', { className: 'items-list' }, elementsToRender));
     }
 });
 
-var ItemPreviewScreen = React.createClass({
+var ItemPreviewScreen = createReactClass({
     displayName: 'ItemPreviewScreen',
 
     propTypes: {
-        item: React.PropTypes.object.isRequired
+        item: PropTypes.object.isRequired
     },
     render: function () {
         return React.createElement('div', { className: 'item-preview-screen fullscreen-popup' }, React.createElement(ItemEntity, this.props.item));
@@ -46,7 +76,7 @@ var ItemPreviewScreen = React.createClass({
 /**
  * Data
  */
-var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: '750' }, { id: 2, name: "Jacket", description: "Brand new jacket", price: '75.50' }, { id: 3, name: "Car", description: "Brand new car", price: '7750' }, { id: 4, name: "Watch", description: "Brand new watch", price: '110.99' }];
+var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 }, { id: 2, name: "Jacket", description: "Brand new jacket", price: 75.50 }, { id: 3, name: "Car", description: "Brand new car", price: 7750 }, { id: 4, name: "Watch", description: "Brand new watch", price: 110.99 }];
 
 ReactDOM.render(React.createElement(ItemsList, {
     items: items
