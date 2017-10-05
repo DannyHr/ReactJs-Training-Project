@@ -12,12 +12,10 @@ var ItemEntity = React.createClass({
     },
     render: function () {
         return (
-            React.createElement('li', { className: 'item' },
-                React.createElement('h2', { className: 'item-name' }, this.props.name),
-                React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']),
-                React.createElement('div', { className: 'item-description' }, this.props.description),
-                React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency'])
-            )
+            React.createElement('h2', { className: 'item-name' }, this.props.name),
+            React.createElement('a', { href: 'products/' + this.props.id, className: 'item-link' }, STRINGS['view-more']),
+            React.createElement('div', { className: 'item-description' }, this.props.description),
+            React.createElement('div', { className: 'item-price' }, this.props.price + ' ' + STRINGS['currency'])
         );
     }
 });
@@ -29,8 +27,10 @@ var ItemsList = React.createClass({
     render: function () {
         var elementsToRender = this.props.items.map(function (item) {
             return (
-                React.createElement(ItemEntity, item)
-            )
+                React.createElement('li', { className: 'item' },
+                    React.createElement(ItemEntity, item)
+                )
+            );
         });
 
         return (
@@ -39,7 +39,20 @@ var ItemsList = React.createClass({
             )
         );
     }
-})
+});
+
+var ItemPreviewScreen = React.createClass({
+    propTypes: {
+        item: React.PropTypes.object.isRequired
+    },
+    render: function () {
+        return (
+            React.createElement('div', { className: 'item-preview-screen fullscreen-popup' },
+                React.createElement(ItemEntity, this.props.item)
+            )
+        );
+    }
+});
 
 
 /**
