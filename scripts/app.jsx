@@ -22,7 +22,7 @@ var ItemListEntity = createReactClass({
                 <h3 className='item-name'>{this.props.name}</h3>
                 <div className='item-description'>{this.props.description}</div>
                 <div className='item-price'>{this.props.price + ' ' + STRINGS['currency']}</div>
-                <a href={'products/' + this.props.id} className='item-link'>{STRINGS['view-more']}</a>
+                <a href={'?product=' + this.props.id} className='item-link'>{STRINGS['view-more']}</a>
             </li >
         )
     }
@@ -56,7 +56,8 @@ var ItemsList = createReactClass({
 var ItemPreviewContainer = createReactClass({
     propTypes: {
         item: PropTypes.object.isRequired,
-        isShown: PropTypes.bool.isRequired
+        isShown: PropTypes.bool,
+        togglePreviewVisibility: PropTypes.func.isRequired
     },
     getDefaultProps: function () {
         return {
@@ -64,19 +65,25 @@ var ItemPreviewContainer = createReactClass({
             isShown: false
         }
     },
+    hidePreview: function(){
+        this.props.togglePreviewVisibility(false);
+    },
     render: function () {
         if (this.props.isShown) {
             return (
                 <div className='item-preview-screen fullscreen-popup'>
-                    <h2 className='item-name'>{this.props.item.name}</h2>
-                    <div className='item-description'>{this.props.item.description}</div>
-                    <div className='item-price'>{this.props.item.price + ' ' + STRINGS['currency']}</div>
-                    <a href={'products/' + this.props.item.id} className='item-link'>{STRINGS['view-more']}</a>
+                    <div id="item-preview-item-container">
+                        <h2 className='item-name'>{this.props.item.name}</h2>
+                        <div className='item-description'>{this.props.item.description}</div>
+                        <div className='item-price'>{this.props.item.price + ' ' + STRINGS['currency']}</div>
+                        <a href={'?product=' + this.props.item.id} className='item-link'>{STRINGS['view-more']}</a>
+                        <div className="close-btn" onClick={this.hidePreview}>&#215;</div>
+                    </div>
                 </div>
             );
         }
         else {
-            return <div className='item-preview-screen fullscreen-popup' />;
+            return <div className='item-preview-screen fullscreen-popup hidden' />;
         }
     }
 });
@@ -133,6 +140,10 @@ var items = [
     { id: 2, name: "Jacket", description: "Brand new jacket", price: 75.50 },
     { id: 3, name: "Car", description: "Brand new car", price: 7750 },
     { id: 4, name: "Watch", description: "Brand new watch", price: 110.99 },
+    { id: 5, name: "Car", description: "Brand new car", price: 7750 },
+    { id: 6, name: "Watch", description: "Brand new watch", price: 110.99 },
+    { id: 7, name: "Jacket", description: "Brand new jacket", price: 75.50 },
+    { id: 8, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 },
 ];
 
 ReactDOM.render(

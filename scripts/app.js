@@ -41,7 +41,7 @@ var ItemListEntity = createReactClass({
             ),
             React.createElement(
                 'a',
-                { href: 'products/' + this.props.id, className: 'item-link' },
+                { href: '?product=' + this.props.id, className: 'item-link' },
                 STRINGS['view-more']
             )
         );
@@ -84,7 +84,8 @@ var ItemPreviewContainer = createReactClass({
 
     propTypes: {
         item: PropTypes.object.isRequired,
-        isShown: PropTypes.bool.isRequired
+        isShown: PropTypes.bool,
+        togglePreviewVisibility: PropTypes.func.isRequired
     },
     getDefaultProps: function () {
         return {
@@ -92,34 +93,46 @@ var ItemPreviewContainer = createReactClass({
             isShown: false
         };
     },
+    hidePreview: function () {
+        this.props.togglePreviewVisibility(false);
+    },
     render: function () {
         if (this.props.isShown) {
             return React.createElement(
                 'div',
                 { className: 'item-preview-screen fullscreen-popup' },
                 React.createElement(
-                    'h2',
-                    { className: 'item-name' },
-                    this.props.item.name
-                ),
-                React.createElement(
                     'div',
-                    { className: 'item-description' },
-                    this.props.item.description
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'item-price' },
-                    this.props.item.price + ' ' + STRINGS['currency']
-                ),
-                React.createElement(
-                    'a',
-                    { href: 'products/' + this.props.item.id, className: 'item-link' },
-                    STRINGS['view-more']
+                    { id: 'item-preview-item-container' },
+                    React.createElement(
+                        'h2',
+                        { className: 'item-name' },
+                        this.props.item.name
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'item-description' },
+                        this.props.item.description
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'item-price' },
+                        this.props.item.price + ' ' + STRINGS['currency']
+                    ),
+                    React.createElement(
+                        'a',
+                        { href: '?product=' + this.props.item.id, className: 'item-link' },
+                        STRINGS['view-more']
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'close-btn', onClick: this.hidePreview },
+                        '\xD7'
+                    )
                 )
             );
         } else {
-            return React.createElement('div', { className: 'item-preview-screen fullscreen-popup' });
+            return React.createElement('div', { className: 'item-preview-screen fullscreen-popup hidden' });
         }
     }
 });
@@ -178,7 +191,7 @@ var Header = createReactClass({
 /**
  * Data
  */
-var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 }, { id: 2, name: "Jacket", description: "Brand new jacket", price: 75.50 }, { id: 3, name: "Car", description: "Brand new car", price: 7750 }, { id: 4, name: "Watch", description: "Brand new watch", price: 110.99 }];
+var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 }, { id: 2, name: "Jacket", description: "Brand new jacket", price: 75.50 }, { id: 3, name: "Car", description: "Brand new car", price: 7750 }, { id: 4, name: "Watch", description: "Brand new watch", price: 110.99 }, { id: 5, name: "Car", description: "Brand new car", price: 7750 }, { id: 6, name: "Watch", description: "Brand new watch", price: 110.99 }, { id: 7, name: "Jacket", description: "Brand new jacket", price: 75.50 }, { id: 8, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 }];
 
 ReactDOM.render(React.createElement(
     'div',
