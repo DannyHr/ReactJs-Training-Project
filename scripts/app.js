@@ -50,15 +50,18 @@ var ItemsList = createReactClass({
     },
     render: function () {
         var elementsToRender = this.props.items.map(function (item) {
-            return React.createElement(ItemEntity, _extends({}, item, { key: item.id.toString() }))
-
-            // React.createElement('li', { className: 'item' },
-            //     React.createElement(ItemEntity, item)
-            // )
-            ;
+            return React.createElement(ItemEntity, _extends({}, item, { key: item.id }));
         });
 
-        return React.createElement('div', { className: 'items-list-container' }, React.createElement('ul', { className: 'items-list' }, elementsToRender));
+        return React.createElement(
+            'div',
+            { className: 'items-list-container' },
+            React.createElement(
+                'ul',
+                { className: 'items-list' },
+                elementsToRender
+            )
+        );
     }
 });
 
@@ -69,7 +72,11 @@ var ItemPreviewScreen = createReactClass({
         item: PropTypes.object.isRequired
     },
     render: function () {
-        return React.createElement('div', { className: 'item-preview-screen fullscreen-popup' }, React.createElement(ItemEntity, this.props.item));
+        return React.createElement(
+            'div',
+            { className: 'item-preview-screen fullscreen-popup' },
+            React.createElement(ItemEntity, this.props.item)
+        );
     }
 });
 
@@ -78,9 +85,7 @@ var ItemPreviewScreen = createReactClass({
  */
 var items = [{ id: 1, name: "Mobile Phone", description: "Brand new mobile phone", price: 750 }, { id: 2, name: "Jacket", description: "Brand new jacket", price: 75.50 }, { id: 3, name: "Car", description: "Brand new car", price: 7750 }, { id: 4, name: "Watch", description: "Brand new watch", price: 110.99 }];
 
-ReactDOM.render(React.createElement(ItemsList, {
-    items: items
-}), document.getElementById('react-app'));
+ReactDOM.render(React.createElement(ItemsList, { items: items }), document.getElementById('react-app'));
 
 // var ContactItem = React.createClass({
 //     propTypes: {

@@ -29,18 +29,16 @@ var ItemsList = createReactClass({
     render: function () {
         var elementsToRender = this.props.items.map(function (item) {
             return (
-                <ItemEntity {...item} key={item.id}/>
-
-                // React.createElement('li', { className: 'item' },
-                //     React.createElement(ItemEntity, item)
-                // )
+                <ItemEntity {...item} key={item.id} />
             );
         });
 
         return (
-            React.createElement('div', { className: 'items-list-container' },
-                React.createElement('ul', { className: 'items-list' }, elementsToRender)
-            )
+            <div className='items-list-container'>
+                <ul className='items-list'>
+                    {elementsToRender}
+                </ul>
+            </div>
         );
     }
 });
@@ -51,13 +49,12 @@ var ItemPreviewScreen = createReactClass({
     },
     render: function () {
         return (
-            React.createElement('div', { className: 'item-preview-screen fullscreen-popup' },
-                React.createElement(ItemEntity, this.props.item)
-            )
+            <div className='item-preview-screen fullscreen-popup'>
+                <ItemEntity {...this.props.item} />
+            </div>
         );
     }
 });
-
 
 /**
  * Data
@@ -70,12 +67,9 @@ var items = [
 ];
 
 ReactDOM.render(
-    React.createElement(ItemsList, {
-        items: items
-    }),
+    <ItemsList {...{items: items}}/>,
     document.getElementById('react-app')
 );
-
 
 // var ContactItem = React.createClass({
 //     propTypes: {
