@@ -2,6 +2,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var STRINGS = {
     'view-more': 'View More',
+    'quick-view': 'Quick View',
     'currency': 'BGN'
 };
 
@@ -23,26 +24,30 @@ var ItemListEntity = createReactClass({
     render: function () {
         return React.createElement(
             'li',
-            { className: 'item', onClick: this.changeItem },
-            React.createElement(
-                'h3',
-                { className: 'item-name' },
-                this.props.name
-            ),
-            React.createElement(
-                'div',
-                { className: 'item-description' },
-                this.props.description
-            ),
-            React.createElement(
-                'div',
-                { className: 'item-price' },
-                this.props.price + ' ' + STRINGS['currency']
-            ),
+            { className: 'item' },
             React.createElement(
                 'a',
                 { href: '?product=' + this.props.id, className: 'item-link' },
-                STRINGS['view-more']
+                React.createElement(
+                    'h3',
+                    { className: 'item-name' },
+                    this.props.name
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'item-description' },
+                    this.props.description
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'item-price' },
+                    this.props.price + ' ' + STRINGS['currency']
+                ),
+                React.createElement(
+                    'a',
+                    { href: '#', onClick: this.changeItem, className: 'quick-view-link' },
+                    STRINGS['quick-view']
+                )
             )
         );
     }

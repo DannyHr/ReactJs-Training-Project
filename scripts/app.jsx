@@ -1,5 +1,6 @@
 var STRINGS = {
     'view-more': 'View More',
+    'quick-view': 'Quick View',
     'currency': 'BGN'
 }
 
@@ -18,12 +19,14 @@ var ItemListEntity = createReactClass({
     },
     render: function () {
         return (
-            <li className='item' onClick={this.changeItem} >
-                <h3 className='item-name'>{this.props.name}</h3>
-                <div className='item-description'>{this.props.description}</div>
-                <div className='item-price'>{this.props.price + ' ' + STRINGS['currency']}</div>
-                <a href={'?product=' + this.props.id} className='item-link'>{STRINGS['view-more']}</a>
-            </li >
+            <li className='item'>
+                <a href={'?product=' + this.props.id} className='item-link'>
+                    <h3 className='item-name'>{this.props.name}</h3>
+                    <div className='item-description'>{this.props.description}</div>
+                    <div className='item-price'>{this.props.price + ' ' + STRINGS['currency']}</div>
+                    <a href={'#'} onClick={this.changeItem} className='quick-view-link'>{STRINGS['quick-view']}</a>
+                </a>
+            </li>
         )
     }
 });
@@ -65,7 +68,7 @@ var ItemPreviewContainer = createReactClass({
             isShown: false
         }
     },
-    hidePreview: function(){
+    hidePreview: function () {
         this.props.togglePreviewVisibility(false);
     },
     render: function () {
@@ -76,7 +79,7 @@ var ItemPreviewContainer = createReactClass({
                         <h2 className='item-name'>{this.props.item.name}</h2>
                         <div className='item-description'>{this.props.item.description}</div>
                         <div className='item-price'>{this.props.item.price + ' ' + STRINGS['currency']}</div>
-                        <a href={'?product=' + this.props.item.id} className='item-link'>{STRINGS['view-more']}</a>
+                        <a href={'?product=' + this.props.item.id} className='view-more-link'>{STRINGS['view-more']}</a>
                         <div className="close-btn" onClick={this.hidePreview}>&#215;</div>
                     </div>
                 </div>
