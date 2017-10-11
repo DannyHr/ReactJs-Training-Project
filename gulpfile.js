@@ -10,7 +10,7 @@ var jsFiles = [
     'scripts/src/app.jsx'
 ]
 
-gulp.task('transformJsxToJs', function () {
+gulp.task('transformJsxToJsAndConcat', function () {
     return gulp.src(jsFiles)
         .pipe(sourcemaps.init())
         .pipe(babel({
@@ -21,7 +21,7 @@ gulp.task('transformJsxToJs', function () {
         .pipe(gulp.dest("scripts/js/"));
 });
 
-gulp.task('webserver', ['transformJsxToJs'], function () {
+gulp.task('webserver', ['transformJsxToJsAndConcat'], function () {
     gulp.src('./')
         .pipe(webserver({
             livereload: true
