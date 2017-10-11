@@ -1,10 +1,29 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
+var sourcemaps = require("gulp-sourcemaps");
+var concat = require("gulp-concat");
+var webserver = require('gulp-webserver');
 
-gulp.task("transformJsxToJs", function(){
-    return gulp.src("scripts/*.jsx")
+var jsFiles = [
+    'scripts/src/**/!(app)*.js',
+    'scripts/src/**/!(app)*.jsx',
+    'scripts/src/app.jsx'
+]
+
+gulp.task('transformJsxToJs', function () {
+    return gulp.src(jsFiles)
+        .pipe(sourcemaps.init())
         .pipe(babel({
             presets: ["react"]
         }))
-        .pipe(gulp.dest("scripts"));
+        .pipe(concat('all.js'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest("scripts/js/"));
+});
+
+gulp.task('webserver', ['transformJsxToJs'], function () {
+    gulp.src('./')
+        .pipe(webserver({
+            livereload: true
+        }));
 });
