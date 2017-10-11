@@ -1,8 +1,12 @@
 var HomePageView = createReactClass({
+    contextTypes: {
+        store: PropTypes.object
+    },
     componentDidMount: function() {
         var store = this.context.store;
+        var self = this;
         store.subscribe(function () {
-            this.forceUpdate();
+            self.forceUpdate();
         });
     },
     render: function () {
@@ -14,7 +18,3 @@ var HomePageView = createReactClass({
         )
     }
 });
-
-HomePageView.contextTypes = {
-    store: PropTypes.object
-}

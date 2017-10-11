@@ -1,4 +1,7 @@
 var ItemListEntity = createReactClass({
+    contextTypes: {
+        store: PropTypes.object
+    },
     propTypes: {
         item: PropTypes.object.isRequired
     },
@@ -20,7 +23,7 @@ var ItemListEntity = createReactClass({
 
         return (
             <li className='item'>
-                <span onClick={this.showItemPreview}  className='quick-view-link'>
+                <span onClick={this.showItemPreview} className='quick-view-link'>
                     <h3 className='item-name'>{this.props.item.name}</h3>
                     <div className='item-description'>{this.props.item.description}</div>
                     <div className='item-price'>{this.props.item.price + ' ' + STRINGS.CURRENCY}</div>
@@ -31,11 +34,10 @@ var ItemListEntity = createReactClass({
     }
 });
 
-ItemListEntity.contextTypes = {
-    store: PropTypes.object
-}
-
 var ItemsList = createReactClass({
+    contextTypes: {
+        store: PropTypes.object
+    },
     render: function () {
         var store = this.context.store;
         var state = store.getState();
@@ -56,7 +58,3 @@ var ItemsList = createReactClass({
         );
     }
 });
-
-ItemsList.contextTypes = {
-    store: PropTypes.object
-}

@@ -1,4 +1,7 @@
 var ItemPreviewContainer = createReactClass({
+    contextTypes: {
+        store: PropTypes.object
+    },
     hidePreview: function () {
         var store = this.context.store;
         store.dispatch({
@@ -28,7 +31,3 @@ var ItemPreviewContainer = createReactClass({
         }
     }
 });
-
-ItemPreviewContainer.contextTypes = {
-    store: PropTypes.object
-}

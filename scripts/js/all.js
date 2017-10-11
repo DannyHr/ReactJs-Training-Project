@@ -43,6 +43,23 @@ if (typeof Object.assign != 'function') {
         configurable: true
     });
 }
+var appReducer = function (state, action) {
+    // console.log(action)
+    // console.log(state)
+
+    switch (action.type) {
+        case ACTIONS.CHANGE_CURRENT_ITEM:
+            return Object.assign({}, state, {
+                previewScreenCurrentItem: state.homePageAllItems[action.newItemIndex]
+            });
+        case ACTIONS.TOGGLE_PREVIEW_SCREEN:
+            return Object.assign({}, state, {
+                isPreviewScreenShown: action.newState
+            });
+        default:
+            return state;
+    }
+};
 var Header = createReactClass({
     displayName: "Header",
 
@@ -61,10 +78,14 @@ var Header = createReactClass({
 var HomePageView = createReactClass({
     displayName: 'HomePageView',
 
+    contextTypes: {
+        store: PropTypes.object
+    },
     componentDidMount: function () {
         var store = this.context.store;
+        var self = this;
         store.subscribe(function () {
-            this.forceUpdate();
+            self.forceUpdate();
         });
     },
     render: function () {
@@ -76,13 +97,12 @@ var HomePageView = createReactClass({
         );
     }
 });
-
-HomePageView.contextTypes = {
-    store: PropTypes.object
-};
 var ItemPreviewContainer = createReactClass({
     displayName: 'ItemPreviewContainer',
 
+    contextTypes: {
+        store: PropTypes.object
+    },
     hidePreview: function () {
         var store = this.context.store;
         store.dispatch({
@@ -133,13 +153,12 @@ var ItemPreviewContainer = createReactClass({
         }
     }
 });
-
-ItemPreviewContainer.contextTypes = {
-    store: PropTypes.object
-};
 var ItemListEntity = createReactClass({
     displayName: 'ItemListEntity',
 
+    contextTypes: {
+        store: PropTypes.object
+    },
     propTypes: {
         item: PropTypes.object.isRequired
     },
@@ -190,13 +209,12 @@ var ItemListEntity = createReactClass({
     }
 });
 
-ItemListEntity.contextTypes = {
-    store: PropTypes.object
-};
-
 var ItemsList = createReactClass({
     displayName: 'ItemsList',
 
+    contextTypes: {
+        store: PropTypes.object
+    },
     render: function () {
         var store = this.context.store;
         var state = store.getState();
@@ -221,10 +239,6 @@ var ItemsList = createReactClass({
         );
     }
 });
-
-ItemsList.contextTypes = {
-    store: PropTypes.object
-};
 var Main = createReactClass({
     displayName: "Main",
 
@@ -237,23 +251,6 @@ var Main = createReactClass({
         );
     }
 });
-var appReducer = function (state, action) {
-    // console.log(action)
-    // console.log(state)
-
-    switch (action.type) {
-        case ACTIONS.CHANGE_CURRENT_ITEM:
-            return Object.assign({}, state, {
-                previewScreenCurrentItem: state.homePageAllItems[action.newItemIndex]
-            });
-        case ACTIONS.TOGGLE_PREVIEW_SCREEN:
-            return Object.assign({}, state, {
-                isPreviewScreenShown: action.newState
-            });
-        default:
-            return state;
-    }
-};
 /**
  * Dump Data
  */
