@@ -10,6 +10,39 @@ var STRINGS = {
     CURRENCY: 'BGN',
     HEADER_WELCOME: 'Welcome to our shop!'
 };
+if (typeof Object.assign != 'function') {
+    // Must be writable: true, enumerable: false, configurable: true
+    Object.defineProperty(Object, "assign", {
+        value: function assign(target, varArgs) {
+            // .length of function is 2
+            'use strict';
+
+            if (target == null) {
+                // TypeError if undefined or null
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+
+            var to = Object(target);
+
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+
+                if (nextSource != null) {
+                    // Skip over if undefined or null
+                    for (var nextKey in nextSource) {
+                        // Avoid bugs when hasOwnProperty is shadowed
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        writable: true,
+        configurable: true
+    });
+}
 var Header = createReactClass({
     displayName: "Header",
 
@@ -28,9 +61,9 @@ var Header = createReactClass({
 var HomePageView = createReactClass({
     displayName: 'HomePageView',
 
-    componentDidMount() {
+    componentDidMount: function () {
         var store = this.context.store;
-        store.subscribe(() => {
+        store.subscribe(function () {
             this.forceUpdate();
         });
     },
@@ -205,8 +238,8 @@ var Main = createReactClass({
     }
 });
 var appReducer = function (state, action) {
-    console.log(action);
-    console.log(state);
+    // console.log(action)
+    // console.log(state)
 
     switch (action.type) {
         case ACTIONS.CHANGE_CURRENT_ITEM:

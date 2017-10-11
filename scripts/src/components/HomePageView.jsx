@@ -1,7 +1,7 @@
 var HomePageView = createReactClass({
-    componentDidMount() {
+    componentDidMount: function() {
         var store = this.context.store;
-        store.subscribe(() => {
+        store.subscribe(function () {
             this.forceUpdate();
         });
     },
