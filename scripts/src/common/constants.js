@@ -1,0 +1,12 @@
+var ACTIONS = {
+    CHANGE_CURRENT_ITEM: 'CHANGE_CURRENT_ITEM',
+    TOGGLE_PREVIEW_SCREEN: 'TOGGLE_PREVIEW_SCREEN'
+
+}
+
+var STRINGS = {
+    VIEW_MORE: 'View Product',
+    QUICK_VIEW: 'Quick View',
+    CURRENCY: 'BGN',
+    HEADER_WELCOME: 'Welcome to our shop!'
+}
