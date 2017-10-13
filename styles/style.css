@@ -71,7 +71,7 @@ h6 {
 #header-navigation #cart #cart-content-container {
   position: absolute;
   width: 300px;
-  min-height: 150px;
+  min-height: 100px;
   right: 0;
   background-color: white;
   z-index: 10;
@@ -97,8 +97,8 @@ h6 {
 }
 
 #cart-content-container .item-price {
+  position: absolute;
   line-height: 90px;
-  bottom: auto;
   top: 0;
   right: 10px;
 }
@@ -141,11 +141,7 @@ h2 {
   cursor: pointer;
 }
 
-a.item-link {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-}
+
 
 .quick-view-link {
   display: block;
@@ -157,10 +153,29 @@ a.item-link {
   text-decoration: none;
 }
 
-.item-price {
+#home-page .item-add-cart, #home-page .item-link {
+  border: 1px solid black;
+  padding: 5px;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 5px;
+  right: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  color: black;
+  text-decoration: none;
+}
+
+#home-page .item-add-cart:hover, #home-page .item-link:hover {
+  background-color: #E4E4E4;
+}
+
+#home-page .item-link {
+  left: 5px;
+  right: auto;
+}
+
+.item-description {
+  position: relative;
 }
 
 .fullscreen-popup {
