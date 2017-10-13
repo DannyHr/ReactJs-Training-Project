@@ -1,7 +1,4 @@
 var appReducer = function (state, action) {
-    // console.log(action)
-    // console.log(state)
-
     switch (action.type) {
         case ACTIONS.CHANGE_CURRENT_ITEM:
             return Object.assign({}, state, {
@@ -12,6 +9,10 @@ var appReducer = function (state, action) {
                 isPreviewScreenShown: action.newState
             });
         default:
-            return state;
+            return state || {
+                homePageAllItems: initialItems,
+                previewScreenCurrentItem: {},
+                isPreviewScreenShown: false
+            };
     }
 }

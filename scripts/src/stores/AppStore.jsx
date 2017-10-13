@@ -13,10 +13,8 @@ var initialItems = [
 ];
 
 var appStore = Redux.createStore(
-    appReducer,
-    {
-        homePageAllItems: initialItems,
-        previewScreenCurrentItem: {},
-        isPreviewScreenShown: false
-    }
+    Redux.combineReducers({
+        app: appReducer,
+        header: headerReducer
+    })
 );

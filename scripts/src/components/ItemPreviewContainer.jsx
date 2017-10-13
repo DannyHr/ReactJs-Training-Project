@@ -4,6 +4,7 @@ var ItemPreviewContainer = createReactClass({
     },
     hidePreview: function () {
         var store = this.context.store;
+        
         store.dispatch({
             type: ACTIONS.TOGGLE_PREVIEW_SCREEN,
             newState: false
@@ -11,7 +12,9 @@ var ItemPreviewContainer = createReactClass({
     },
     render: function () {
         var store = this.context.store;
-        var state = store.getState();
+        var state = store.getState().app;
+
+        console.log('Render Header');        
 
         if (state.isPreviewScreenShown) {
             return (

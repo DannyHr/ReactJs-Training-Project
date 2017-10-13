@@ -17,9 +17,20 @@ var ItemListEntity = createReactClass({
             newState: true
         });
     },
+    addItemToCart: function (e) {
+        e.stopPropagation();
+        var store = this.context.store;
+        store.dispatch({
+            type: ACTIONS.ADD_ITEM_TO_CART,
+            newItem: this.props.item
+        });
+    },
     render: function () {
         var store = this.context.store;
-        var state = store.getState();
+        var state = store.getState().app;
+        var self = this;
+
+        console.log('Render ItemListEntity');
 
         return (
             <li className='item'>
@@ -28,8 +39,9 @@ var ItemListEntity = createReactClass({
                     <div className='item-description'>{this.props.item.description}</div>
                     <div className='item-price'>{this.props.item.price + ' ' + STRINGS.CURRENCY}</div>
                     <a href={'#product=' + this.props.item.id} className='item-link'>{STRINGS.VIEW_MORE}</a>
+                    <span className='item-add-cart' onClick={this.addItemToCart}>{STRINGS.ADD_TO_CART}</span>
                 </span>
-            </li>
+            </li >
         )
     }
 });
@@ -40,7 +52,9 @@ var ItemsList = createReactClass({
     },
     render: function () {
         var store = this.context.store;
-        var state = store.getState();
+        var state = store.getState().app;
+
+        console.log('Render ItemsList');
 
         var elementsToRender = state.homePageAllItems.map(function (item) {
             return (

@@ -30,11 +30,85 @@ h6 {
   width: 100%;
 }
 
-#header-container > h1 {
-  color: white;
-  line-height: 50px;
+#header-wrapper {
   width: 70%;
   margin: auto;
+}
+
+#header-container #header-wrapper h1 {
+  color: white;
+  line-height: 50px;
+  display: inline-block;
+}
+
+#header-navigation {
+  display: inline-block;
+  float: right;
+  position: relative;
+}
+
+#header-navigation #cart,
+#header-navigation #nav-menu {
+  height: 100%;
+  line-height: 50px;
+  width: 50px;
+  text-align: center;
+  background-color: white;
+  display: inline-block;
+  color: black;
+  cursor: pointer;
+}
+
+#header-navigation #cart:hover,
+#header-navigation #nav-menu:hover {
+  background-color: #E4E4E4;
+}
+
+#header-navigation #cart {
+  margin-right: 20px;
+}
+
+#header-navigation #cart #cart-content-container {
+  position: absolute;
+  width: 300px;
+  min-height: 150px;
+  right: 0;
+  background-color: white;
+  z-index: 10;
+}
+
+#cart-content-container li.item {
+  display: block;
+  width: auto;
+  height: 90px;
+  margin: 10px;
+}
+
+#cart-content-container span.item-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#cart-content-container h3.item-name {
+  line-height: 90px;
+  max-width: 50%;
+  margin-left: 10px;
+}
+
+#cart-content-container .item-price {
+  line-height: 90px;
+  bottom: auto;
+  top: 0;
+  right: 10px;
+}
+
+#cart-content-container .item-remove-cart {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  line-height: 20px;
+  font-size: 20px;
 }
 
 .items-list-container {
