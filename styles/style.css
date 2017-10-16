@@ -70,7 +70,7 @@ h6 {
 
 #header-navigation #cart #cart-content-container {
   position: absolute;
-  width: 300px;
+  width: 320px;
   min-height: 100px;
   right: 0;
   background-color: white;
@@ -92,7 +92,7 @@ h6 {
 
 #cart-content-container h3.item-name {
   line-height: 90px;
-  max-width: 50%;
+  max-width: 60%;
   margin-left: 10px;
 }
 
