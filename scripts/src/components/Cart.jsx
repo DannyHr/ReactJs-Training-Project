@@ -5,8 +5,21 @@ var CartItem = createReactClass({
     propTypes: {
         item: PropTypes.object.isRequired
     },
-    removeItemFromCart: function () {
+    componentDidMount: function () {
+        var self = this;
+        socket.on('item_removed', function (id) {
+            var store = self.context.store;
+            store.dispatch({
+                type: ACTIONS.REMOVE_ITEM_FROM_CART,
+                idToRemove: id
+            });
+        });
+    },
+    removeItemFromCart: function (e) {
+        e.stopPropagation();
         var store = this.context.store;
+
+        socket.emit('item_removed', this.props.item.id);
 
         store.dispatch({
             type: ACTIONS.REMOVE_ITEM_FROM_CART,

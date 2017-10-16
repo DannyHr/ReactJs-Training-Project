@@ -17,9 +17,14 @@ io.on('connection', function (socket) {
         console.log('user disconnected');
     });
 
-    socket.on('chat message', function (msg) {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
+    socket.on('item_removed', function (id) {
+        console.log('Item removed: ' + id);
+        io.emit('item_removed', id);
+    });
+
+    socket.on('item_added', function (item) {
+        console.log('Item added: ' + item.name + '; id: ' + item.id);
+        io.emit('item_added', item);
     });
 });
 

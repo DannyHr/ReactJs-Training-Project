@@ -5,6 +5,17 @@ var ItemListEntity = createReactClass({
     propTypes: {
         item: PropTypes.object.isRequired
     },
+    componentDidMount: function () {
+        var self = this;
+        socket.on('item_added', function (item) {
+            var store = self.context.store;
+            
+            store.dispatch({
+                type: ACTIONS.ADD_ITEM_TO_CART,
+                newItem: item
+            });
+        });
+    },
     showItemPreview: function () {
         var store = this.context.store;
         store.dispatch({
@@ -20,6 +31,9 @@ var ItemListEntity = createReactClass({
     addItemToCart: function (e) {
         e.stopPropagation();
         var store = this.context.store;
+
+        socket.emit('item_added', this.props.item);        
+
         store.dispatch({
             type: ACTIONS.ADD_ITEM_TO_CART,
             newItem: this.props.item

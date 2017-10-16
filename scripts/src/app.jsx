@@ -1,3 +1,5 @@
+var socket = io();
+
 ReactDOM.render(
     <ReactRedux.Provider store={appStore}>
         <Main />
