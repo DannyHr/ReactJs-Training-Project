@@ -1,3 +1,9 @@
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
+import CartContent from './CartContent.jsx';
+import { ACTIONS, STRINGS } from '../common/constants.js';
+
 var Header = createReactClass({
     contextTypes: {
         store: PropTypes.object
@@ -12,7 +18,7 @@ var Header = createReactClass({
     toggleCartContentContainer: function () {
         var store = this.context.store;
         var state = store.getState().header;
-        
+
         var newState = !(state.isCartContentContainerShown);
 
         store.dispatch({
@@ -43,3 +49,5 @@ var Header = createReactClass({
         )
     }
 });
+
+export default Header;

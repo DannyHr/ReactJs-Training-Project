@@ -17,3 +17,5 @@ var STRINGS = {
 var VARS = {
     CART_ITEMS: 'cart_items'
 }
+
+export { ACTIONS, STRINGS, VARS };

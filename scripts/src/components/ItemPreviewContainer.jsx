@@ -1,3 +1,9 @@
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
+import { ACTIONS, STRINGS } from '../common/constants.js';
+
+
 var ItemPreviewContainer = createReactClass({
     contextTypes: {
         store: PropTypes.object
@@ -34,3 +40,5 @@ var ItemPreviewContainer = createReactClass({
         }
     }
 });
+
+export default ItemPreviewContainer;

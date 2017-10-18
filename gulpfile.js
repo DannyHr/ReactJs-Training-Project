@@ -1,34 +1,50 @@
 var gulp = require('gulp');
-var babel = require('gulp-babel');
-var sourcemaps = require("gulp-sourcemaps");
-var concat = require("gulp-concat");
 var nodemon = require('gulp-nodemon');
+var gulpWebpack = require('gulp-webpack');
+var webpackConfig = require('./webpack.config.js');
+var webpack = require('webpack');
+var path = require('path');
+var gutil = require('gutil');
 
 var jsFiles = [
     'scripts/src/**/!(app)*.js',
     'scripts/src/**/!(app)*.jsx',
     'scripts/src/app.jsx'
-]
+];
 
-gulp.task('transformJsxToJsAndConcat', function () {
-    return gulp.src(jsFiles)
-        .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ["react"]
-        }))
-        .pipe(concat('all.js'))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest("scripts/js/"));
+var BUILD_DIR = path.resolve(__dirname, 'scripts/js/');
+var APP_DIR = path.resolve(__dirname, 'scripts/src/');
+
+gulp.task('makeJsModules', function () {
+    return gulp.src(APP_DIR + '/app.jsx')
+        .pipe(gulpWebpack({
+            output: {
+                filename: 'app.js',
+                sourceMapFilename: 'app.js.map'
+            },
+            module: {
+                loaders: [
+                    {
+                        test: /\.jsx?/,
+                        include: APP_DIR,
+                        loader: 'babel-loader'
+                    }
+                ]
+            },
+            devtool: '#source-map'
+        }, webpack))
+        .on('error', gutil.log)
+        .pipe(gulp.dest('./scripts/js/'));
 });
 
-gulp.task('runserver', ['transformJsxToJsAndConcat'], function (cb) {
+gulp.task('runserver', ['makeJsModules'], function (cb) {
     var stream = nodemon({
         script: 'index.js',
         ext: 'css jsx js html',
-        tasks: ['transformJsxToJsAndConcat'],
+        tasks: ['makeJsModules'],
         ignore: [
             'node_modules/',
-            'scripts/js'  
+            'scripts/js/'
         ],
     });
 

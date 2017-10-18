@@ -1,3 +1,5 @@
+import { ACTIONS, VARS } from '../../src/common/constants.js';
+
 var headerReducer = function (state, action) {
     switch (action.type) {
         case ACTIONS.ADD_ITEM_TO_CART:
@@ -35,3 +37,5 @@ var headerReducer = function (state, action) {
             };
     }
 }
+
+export default headerReducer;

@@ -1,8 +1,14 @@
+import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
+import ItemsList from './ItemsList.jsx';
+import ItemPreviewContainer from './ItemPreviewContainer.jsx';
+
 var HomePageView = createReactClass({
     contextTypes: {
         store: PropTypes.object
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         var store = this.context.store;
         var self = this;
         store.subscribe(function () {
@@ -18,3 +24,5 @@ var HomePageView = createReactClass({
         )
     }
 });
+
+export default HomePageView;
