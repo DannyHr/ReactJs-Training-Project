@@ -37,3 +37,4 @@ var appReducer = function (state, action) {
 }
 
 export default appReducer;
+export { initialItems };
