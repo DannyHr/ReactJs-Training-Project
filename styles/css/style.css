@@ -116,7 +116,7 @@ input#header-search-field {
 
 #cart-content-container h3.item-name {
   line-height: 90px;
-  max-width: 60%;
+  max-width: 52%;
   margin-left: 10px;
 }
 
@@ -127,6 +127,7 @@ input#header-search-field {
   right: 10px;
   font-size: 18px;
   font-weight: normal;
+  width: 130px;
 }
 
 #cart-content-container .item-remove-cart {
@@ -183,7 +184,8 @@ h2 {
 }
 
 #home-page .item-add-cart,
-#home-page .item-link {
+#home-page .item-link,
+#item-preview-item-container .item-add-cart {
   border: 1px solid black;
   padding: 5px;
   position: absolute;
@@ -196,6 +198,7 @@ h2 {
   border-radius: 5px;
   width: 120px;
   text-align: center;
+  cursor: pointer;
 }
 
 #home-page .item-link {
@@ -203,7 +206,8 @@ h2 {
 }
 
 #home-page .item-add-cart:hover,
-#home-page .item-link:hover {
+#home-page .item-link:hover,
+#item-preview-item-container .item-add-cart:hover {
   background-color: #E4E4E4;
 }
 
@@ -260,8 +264,10 @@ h3.item-name {
 }
 
 #item-preview-item-container {
-  width: 25%;
-  height: 300px;
+  width: 450px;
+  min-height: 300px;
+  max-height: 400px;
+  overflow: auto;
   background: white;
   margin: auto;
   padding: 30px;
@@ -310,6 +316,7 @@ h3.item-name {
   display: inline-block;
   vertical-align: top;
   margin-left: 20px;
+  max-width: 210px;
 }
 
 #item-preview-item-container .item-link {
