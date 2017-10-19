@@ -38,7 +38,7 @@ var CartItem = createReactClass({
             <li className='item'>
                 <span onClick={this.showItemPreview} className='item-link'>
                     <h3 className='item-name'>{this.props.item.name}</h3>
-                    <div className='item-price'>{this.props.item.price + ' ' + STRINGS.CURRENCY}</div>
+                    <div className='item-price'>{this.props.item.price.toFixed(2) + ' ' + STRINGS.CURRENCY}</div>
                     <div className="item-remove-cart" onClick={this.removeItemFromCart}>&#215;</div>
                 </span>
             </li>

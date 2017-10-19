@@ -26,7 +26,6 @@ var headerReducer = function (state, action) {
                 itemsInCart: newArray
             });
         case ACTIONS.TOGGLE_CART_CONTENT_CONTAINER:
-            console.log(state)
             return Object.assign({}, state, {
                 isCartContentContainerShown: action.newState
             });

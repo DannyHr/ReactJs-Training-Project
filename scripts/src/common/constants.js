@@ -10,7 +10,7 @@ var STRINGS = {
     VIEW_MORE: 'View Product',
     QUICK_VIEW: 'Quick View',
     CURRENCY: 'BGN',
-    HEADER_WELCOME: 'Welcome to our shop!',
+    HEADER_WELCOME: 'Title',
     ADD_TO_CART: 'Add to Cart'
 }
 

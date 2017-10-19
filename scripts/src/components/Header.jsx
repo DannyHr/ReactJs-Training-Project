@@ -37,12 +37,18 @@ var Header = createReactClass({
                 <div id="header-wrapper">
                     <h1>{STRINGS.HEADER_WELCOME}</h1>
                     <nav id="header-navigation">
-                        <div id="cart" onClick={this.toggleCartContentContainer}>&#128722;
+                        <div id="header-search">
+                            <button id="header-search-button" type="button">
+                                <i className="fa fa-search"></i>
+                            </button>
+                            <input type="text" id="header-search-field" placeholder="Not Implemented Yet" />
+                        </div>
+                        <div id="cart" onClick={this.toggleCartContentContainer}><i className="fa fa-shopping-cart"></i>
                             <div id="cart-content-container" className={'' + (state.isCartContentContainerShown ? '' : 'hidden')}>
                                 <CartContent />
                             </div>
                         </div>
-                        <div id="nav-menu">&#9776;</div>
+                        <div id="nav-menu"><i className="fa fa-bars"></i></div>
                     </nav>
                 </div>
             </header>

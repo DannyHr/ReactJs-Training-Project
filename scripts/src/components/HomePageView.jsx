@@ -2,7 +2,6 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import ItemsList from './ItemsList.jsx';
-import ItemPreviewContainer from './ItemPreviewContainer.jsx';
 
 var HomePageView = createReactClass({
     contextTypes: {
@@ -19,7 +18,6 @@ var HomePageView = createReactClass({
         return (
             <div id='home-page'>
                 <ItemsList />
-                <ItemPreviewContainer />
             </div>
         )
     }

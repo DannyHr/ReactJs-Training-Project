@@ -56,7 +56,8 @@ var ItemListEntity = createReactClass({
                 <span onClick={this.showItemPreview} className='quick-view-link'>
                     <h3 className='item-name'>{this.props.item.name}</h3>
                     <div className='item-description'>{this.props.item.description}</div>
-                    <div className='item-price'>{this.props.item.price + ' ' + STRINGS.CURRENCY}</div>
+                    <div className='item-image-container'><img src={this.props.imageSrc || '/images/no-image.png'} /></div>
+                    <div className='item-price'>{this.props.item.price.toFixed(2) + ' '}<span className='item-price-currency'>{STRINGS.CURRENCY}</span></div>
                     <a href={'#product=' + this.props.item.id} className='item-link'>{STRINGS.VIEW_MORE}</a>
                     <span className='item-add-cart' onClick={this.addItemToCart}>{STRINGS.ADD_TO_CART}</span>
                 </span>

@@ -18,7 +18,7 @@ h6 {
 }
 
 #home-page {
-  width: 70%;
+  width: 1100px;
   min-height: 700px;
   margin: auto;
   background: lightgrey;
@@ -31,7 +31,7 @@ h6 {
 }
 
 #header-wrapper {
-  width: 70%;
+  width: 1100px;
   margin: auto;
 }
 
@@ -45,6 +45,30 @@ h6 {
   display: inline-block;
   float: right;
   position: relative;
+}
+
+#header-search {
+  display: inline-block;
+  margin-right: 20px;
+  position: relative;
+}
+
+#header-search-button {
+  position: absolute;
+  background-color: lightgray;
+  border: none;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+}
+
+input#header-search-field {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  padding-left: 27px;
 }
 
 #header-navigation #cart,
@@ -101,6 +125,8 @@ h6 {
   line-height: 90px;
   top: 0;
   right: 10px;
+  font-size: 18px;
+  font-weight: normal;
 }
 
 #cart-content-container .item-remove-cart {
@@ -109,6 +135,10 @@ h6 {
   right: 2px;
   line-height: 20px;
   font-size: 20px;
+}
+
+#cart-content-container .items-list {
+  width: 100%;
 }
 
 .items-list-container {
@@ -123,25 +153,24 @@ h2 {
 .items-list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
-  text-align: center;
+  margin: 0 auto;
+  width: 960px;
 }
 
 .item {
   display: inline-block;
-  width: 20%;
-  height: 150px;
+  width: 300px;
+  height: 180px;
   text-align: left;
   margin: 0 10px 20px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid darkgray;
   vertical-align: top;
   box-sizing: border-box;
   position: relative;
   cursor: pointer;
+  border-radius: 5px;
 }
-
-
 
 .quick-view-link {
   display: block;
@@ -153,29 +182,72 @@ h2 {
   text-decoration: none;
 }
 
-#home-page .item-add-cart, #home-page .item-link {
+#home-page .item-add-cart,
+#home-page .item-link {
   border: 1px solid black;
   padding: 5px;
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   right: 5px;
   font-size: 14px;
   box-sizing: border-box;
   color: black;
   text-decoration: none;
+  border-radius: 5px;
+  width: 120px;
+  text-align: center;
 }
 
-#home-page .item-add-cart:hover, #home-page .item-link:hover {
+#home-page .item-add-cart:hover,
+#home-page .item-link:hover {
   background-color: #E4E4E4;
 }
 
 #home-page .item-link {
-  left: 5px;
-  right: auto;
+  bottom: 45px;
+}
+
+h3.item-name {
+  font-weight: lighter;
+  font-size: 18px;
 }
 
 .item-description {
   position: relative;
+  font-weight: lighter;
+  font-size: 15px;
+  color: #949494;
+}
+
+.item-image-container {
+  width: 145px;
+  height: 105px;
+  display: inline-block;
+  border: 1px solid rgba(169, 169, 169, 0.5);
+  border-radius: 3px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.item-image-container > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item-price {
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+  top: 55px;
+  right: 7px;
+  text-align: center;
+  width: 120px;
+}
+
+.item-price > .item-price-currency {
+  display: block;
+  font-size: 15px;
+  font-weight: lighter;
 }
 
 .fullscreen-popup {
@@ -188,7 +260,7 @@ h2 {
 }
 
 #item-preview-item-container {
-  width: 40%;
+  width: 25%;
   height: 300px;
   background: white;
   margin: auto;
@@ -198,10 +270,46 @@ h2 {
   position: relative;
 }
 
+#item-preview-item-container .item-lower-elements {
+  position: relative;
+  margin-top: 25px;
+  text-align: center;
+}
+
 #item-preview-item-container .item-price {
   position: relative;
   bottom: auto;
   right: auto;
+  top: auto;
+  vertical-align: top;
+  width: auto;
+}
+
+#item-preview-item-container .item-add-cart {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  display: block;
+  margin: 15px auto;
+}
+
+#item-preview-item-container .item-name {
+  position: relative;
+}
+
+#item-preview-item-container .item-image-container {
+  width: 200px;
+  height: 150px;
+  display: inline-block;
+  margin: 0;
+}
+
+#item-preview-item-container .item-description {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
 }
 
 #item-preview-item-container .item-link {
@@ -210,7 +318,7 @@ h2 {
   left: auto;
 }
 
-.close-btn {
+#item-preview-item-container .close-btn {
   position: absolute;
   top: 20px;
   right: 30px;
