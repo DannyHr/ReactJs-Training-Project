@@ -44,6 +44,7 @@ gulp.task('runserver', ['makeJsModules'], function (cb) {
         tasks: ['makeJsModules'],
         ignore: [
             'scripts/js/',
+            'scripts/src/tests/',
             'node_modules/',
             'gulpfile.js'
         ],

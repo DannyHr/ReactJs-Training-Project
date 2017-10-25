@@ -2,6 +2,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import { ACTIONS, STRINGS } from '../common/constants.js';
+import { socket } from '../common/sockets.js';
 
 var ItemListEntity = createReactClass({
     contextTypes: {
@@ -45,10 +46,6 @@ var ItemListEntity = createReactClass({
         });
     },
     render: function () {
-        var store = this.context.store;
-        var state = store.getState().app;
-        var self = this;
-
         console.log('Render ItemListEntity');
 
         return (
