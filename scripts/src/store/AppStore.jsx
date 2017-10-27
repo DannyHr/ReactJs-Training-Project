@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux';
-import appReducer from '../reducers/AppReducer.jsx';
-import headerReducer from '../reducers/HeaderReducer.jsx';
+import appReducer from './AppReducer.jsx';
+import headerReducer from './HeaderReducer.jsx';
 
 var appStore = createStore(
     combineReducers({

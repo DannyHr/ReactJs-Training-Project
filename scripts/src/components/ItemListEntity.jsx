@@ -1,7 +1,8 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import { ACTIONS, STRINGS } from '../common/constants.js';
+import { STRINGS } from '../common/constants.js';
+import { addItemToCart, changeCurrentItem, togglePreviewScreen } from '../actions/actionCreators.js';
 import { socket } from '../common/sockets.js';
 
 var ItemListEntity = createReactClass({
@@ -16,23 +17,13 @@ var ItemListEntity = createReactClass({
         socket.on('item_added', function (item) {
             var store = self.context.store;
 
-            store.dispatch({
-                type: ACTIONS.ADD_ITEM_TO_CART,
-                newItem: item
-            });
+            store.dispatch(addItemToCart(item));
         });
     },
     showItemPreview: function () {
         var store = this.context.store;
-        store.dispatch({
-            type: ACTIONS.CHANGE_CURRENT_ITEM,
-            newItemIndex: (this.props.item.id - 1)
-        });
-
-        store.dispatch({
-            type: ACTIONS.TOGGLE_PREVIEW_SCREEN,
-            newState: true
-        });
+        store.dispatch(changeCurrentItem(this.props.item.id - 1));
+        store.dispatch(togglePreviewScreen(true));
     },
     addItemToCart: function (e) {
         e.stopPropagation();
@@ -40,10 +31,7 @@ var ItemListEntity = createReactClass({
 
         socket.emit('item_added', this.props.item);
 
-        store.dispatch({
-            type: ACTIONS.ADD_ITEM_TO_CART,
-            newItem: this.props.item
-        });
+        store.dispatch(addItemToCart(this.props.item));
     },
     render: function () {
         console.log('Render ItemListEntity');

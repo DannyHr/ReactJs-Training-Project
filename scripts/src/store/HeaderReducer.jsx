@@ -1,4 +1,5 @@
-import { ACTIONS, VARS } from '../../src/common/constants.js';
+import { VARS } from '../../src/common/constants.js';
+import * as ACTIONS from '../../src/actions/actionTypes.js';
 
 var headerReducer = function (state, action) {
     switch (action.type) {
@@ -6,7 +7,7 @@ var headerReducer = function (state, action) {
             var newItem = action.newItem;
             var newArray = state.itemsInCart.concat(newItem);
 
-            var itemAlreadyInCart = state.itemsInCart.find(function (item) { return newItem.id == item.id });
+            var itemAlreadyInCart = state.itemsInCart.find(function (item) { return newItem.id == item.id; });
 
             if (!itemAlreadyInCart) {
                 localStorage.setItem(VARS.CART_ITEMS, JSON.stringify(newArray));
@@ -18,7 +19,7 @@ var headerReducer = function (state, action) {
                 return state;
             }
         case ACTIONS.REMOVE_ITEM_FROM_CART:
-            var newArray = state.itemsInCart.filter(function (item) { return item.id != action.idToRemove })
+            var newArray = state.itemsInCart.filter(function (item) { return item.id != action.idToRemove; });
 
             localStorage.setItem(VARS.CART_ITEMS, JSON.stringify(newArray));
 
@@ -35,6 +36,6 @@ var headerReducer = function (state, action) {
                 isCartContentContainerShown: false,
             };
     }
-}
+};
 
 export default headerReducer;

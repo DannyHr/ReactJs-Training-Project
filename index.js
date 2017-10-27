@@ -2,9 +2,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var path = require('path');
 
-var port = 8001;
+var port = 8002;
 
 //http
 // unsafe - all files are accessible

@@ -2,7 +2,9 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import CartContent from './CartContent.jsx';
-import { ACTIONS, STRINGS } from '../common/constants.js';
+import { STRINGS } from '../common/constants.js';
+import { toggleCartContentContainer } from '../actions/actionCreators.js';
+
 
 var Header = createReactClass({
     contextTypes: {
@@ -21,10 +23,7 @@ var Header = createReactClass({
 
         var newState = !(state.isCartContentContainerShown);
 
-        store.dispatch({
-            type: ACTIONS.TOGGLE_CART_CONTENT_CONTAINER,
-            newState: newState
-        });
+        store.dispatch(toggleCartContentContainer(newState));
     },
     render: function () {
         var store = this.context.store;
@@ -52,7 +51,7 @@ var Header = createReactClass({
                     </nav>
                 </div>
             </header>
-        )
+        );
     }
 });
 

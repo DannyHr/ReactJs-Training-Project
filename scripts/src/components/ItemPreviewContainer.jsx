@@ -1,7 +1,8 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import { ACTIONS, STRINGS } from '../common/constants.js';
+import { STRINGS } from '../common/constants.js';
+import { togglePreviewScreen, addItemToCart } from '../actions/actionCreators.js';
 import { socket } from '../common/sockets.js';
 
 var ItemPreviewContainer = createReactClass({
@@ -18,10 +19,7 @@ var ItemPreviewContainer = createReactClass({
     hidePreview: function () {
         var store = this.context.store;
 
-        store.dispatch({
-            type: ACTIONS.TOGGLE_PREVIEW_SCREEN,
-            newState: false
-        });
+        store.dispatch(togglePreviewScreen(false));
     },
     addItemToCart: function (e) {
         e.stopPropagation();
@@ -30,10 +28,7 @@ var ItemPreviewContainer = createReactClass({
 
         socket.emit('item_added', state.previewScreenCurrentItem);
 
-        store.dispatch({
-            type: ACTIONS.ADD_ITEM_TO_CART,
-            newItem: state.previewScreenCurrentItem
-        });
+        store.dispatch(addItemToCart(state.previewScreenCurrentItem));
     },
     render: function () {
         var store = this.context.store;

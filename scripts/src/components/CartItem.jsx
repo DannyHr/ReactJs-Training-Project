@@ -1,8 +1,9 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
-import { ACTIONS, STRINGS } from '../common/constants.js';
+import { STRINGS } from '../common/constants.js';
 import { socket } from '../common/sockets.js';
+import { removeItemFromCart } from '../actions/actionCreators.js';
 
 var CartItem = createReactClass({
     contextTypes: {
@@ -15,10 +16,7 @@ var CartItem = createReactClass({
         var self = this;
         socket.on('item_removed', function (id) {
             var store = self.context.store;
-            store.dispatch({
-                type: ACTIONS.REMOVE_ITEM_FROM_CART,
-                idToRemove: id
-            });
+            store.dispatch(removeItemFromCart(id));
         });
     },
     removeItemFromCart: function (e) {
@@ -27,10 +25,7 @@ var CartItem = createReactClass({
 
         socket.emit('item_removed', this.props.item.id);
 
-        store.dispatch({
-            type: ACTIONS.REMOVE_ITEM_FROM_CART,
-            idToRemove: this.props.item.id
-        });
+        store.dispatch(removeItemFromCart(this.props.item.id));
     },
     render: function () {
         console.log('Render CartItem');
