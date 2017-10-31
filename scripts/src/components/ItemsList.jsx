@@ -13,7 +13,7 @@ var ItemsList = createReactClass({
 
         console.log('Render ItemsList');
 
-        var elementsToRender = state.homePageAllItems.map(function (item) {
+        var elementsToRender = state.allItems.map(function (item) {
             return (
                 <ItemListEntity item={item} key={item.id} />
             );

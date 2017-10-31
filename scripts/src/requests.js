@@ -11,8 +11,6 @@ var config = {
     }
 };
 
-console.log(sessionStorage.getItem('AuthToken'));
-
 if (!sessionStorage.getItem('AuthToken')) {
     axios.post('https://baas.kinvey.com/user/kid_r1I-YDgRZ/login', {
         'username': 'admin',

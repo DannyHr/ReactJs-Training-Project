@@ -1,4 +1,4 @@
-import { VARS } from '../../src/common/constants.js';
+import { GLOBALS } from '../../src/common/constants.js';
 import * as ACTIONS from '../../src/actions/actionTypes.js';
 
 var headerReducer = function (state, action) {
@@ -10,8 +10,6 @@ var headerReducer = function (state, action) {
             var itemAlreadyInCart = state.itemsInCart.find(function (item) { return newItem.id == item.id; });
 
             if (!itemAlreadyInCart) {
-                localStorage.setItem(VARS.CART_ITEMS, JSON.stringify(newArray));
-
                 return Object.assign({}, state, {
                     itemsInCart: newArray
                 });
@@ -20,8 +18,6 @@ var headerReducer = function (state, action) {
             }
         case ACTIONS.REMOVE_ITEM_FROM_CART:
             var newArray = state.itemsInCart.filter(function (item) { return item.id != action.idToRemove; });
-
-            localStorage.setItem(VARS.CART_ITEMS, JSON.stringify(newArray));
 
             return Object.assign({}, state, {
                 itemsInCart: newArray
@@ -32,7 +28,7 @@ var headerReducer = function (state, action) {
             });
         default:
             return state || {
-                itemsInCart: JSON.parse(localStorage.getItem(VARS.CART_ITEMS)) || [],
+                itemsInCart: [],
                 isCartContentContainerShown: false,
             };
     }

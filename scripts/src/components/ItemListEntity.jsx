@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { STRINGS } from '../common/constants.js';
 import { addItemToCart, changeCurrentItem, togglePreviewScreen } from '../actions/actionCreators.js';
 import { socket } from '../common/sockets.js';
+import { addItemToCart as addItemToCartPost } from '../common/requester.js';
 
 var ItemListEntity = createReactClass({
     contextTypes: {
@@ -21,17 +22,26 @@ var ItemListEntity = createReactClass({
         });
     },
     showItemPreview: function () {
-        var store = this.context.store;
-        store.dispatch(changeCurrentItem(this.props.item.id - 1));
+        var self = this;
+        var store = self.context.store;
+        store.dispatch(changeCurrentItem(self.props.item));
         store.dispatch(togglePreviewScreen(true));
     },
     addItemToCart: function (e) {
         e.stopPropagation();
-        var store = this.context.store;
+        var self = this;
+        var store = self.context.store;
+        var userState = store.getState().user;
 
-        socket.emit('item_added', this.props.item);
+        addItemToCartPost(userState.currentUser.id, self.props.item.id)
+            .then(function(res){
+                socket.emit('item_added', self.props.item);
+                store.dispatch(addItemToCart(self.props.item));
+            })
+            .catch(function(err){
+                console.error(err);
+            });
 
-        store.dispatch(addItemToCart(this.props.item));
     },
     render: function () {
         console.log('Render ItemListEntity');

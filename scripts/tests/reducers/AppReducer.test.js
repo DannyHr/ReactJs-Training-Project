@@ -4,7 +4,7 @@ import { changeCurrentItem, togglePreviewScreen } from '../../src/actions/action
 
 describe('App Reducer', function () {
     var initialState = {
-        homePageAllItems: initialItems,
+        allItems: initialItems,
         previewScreenCurrentItem: {},
         isPreviewScreenShown: false
     };
@@ -15,7 +15,7 @@ describe('App Reducer', function () {
 
     it('should handle CHANGE_CURRENT_ITEM action', function () {
         expect(appReducer(initialState, changeCurrentItem(0))).toEqual({
-            homePageAllItems: initialItems,
+            allItems: initialItems,
             previewScreenCurrentItem: initialItems[0],
             isPreviewScreenShown: false
         });
@@ -23,7 +23,7 @@ describe('App Reducer', function () {
 
     it('should handle TOGGLE_PREVIEW_SCREEN action', function () {
         expect(appReducer(initialState, togglePreviewScreen(true))).toEqual({
-            homePageAllItems: initialItems,
+            allItems: initialItems,
             previewScreenCurrentItem: {},
             isPreviewScreenShown: true
         });

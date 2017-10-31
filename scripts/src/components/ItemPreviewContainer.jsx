@@ -12,9 +12,12 @@ var ItemPreviewContainer = createReactClass({
     componentDidMount: function () {
         var store = this.context.store;
         var self = this;
-        store.subscribe(function () {
+        this.unsubscribe = store.subscribe(function () {
             self.forceUpdate();
         });
+    },
+    componentWillUnmount: function () {
+        this.unsubscribe();
     },
     hidePreview: function () {
         var store = this.context.store;

@@ -3,11 +3,18 @@ var STRINGS = {
     QUICK_VIEW: 'Quick View',
     CURRENCY: 'BGN',
     HEADER_WELCOME: 'Title',
-    ADD_TO_CART: 'Add to Cart'
+    ADD_TO_CART: 'Add to Cart',
+    USERNAME: 'Username',
+    PASSWORD: 'Password',
+    LOGIN: 'Login',
+    LOGIN_PAGE_TITLE: 'User Login'
 }
 
-var VARS = {
-    CART_ITEMS: 'cart_items'
+var GLOBALS = {
+    CART_ITEMS: 'cart_items',
+    AUTH_TOKEN: 'auth_token',
+    AUTH_ID: 'auth_id',
+    AUTH_USERNAME: 'auth_username'
 }
 
-export { STRINGS, VARS };
+export { STRINGS, GLOBALS };

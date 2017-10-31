@@ -2,11 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
-import Main from '../../src/components/Main.jsx';
+import Home from '../../src/components/Home.jsx';
 
 var storeInitialState = {
     app: {
-        homePageAllItems: [{ id: 1, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 }],
+        allItems: [{ id: 1, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 }],
         previewScreenCurrentItem: {},
         isPreviewScreenShown: false
     },
@@ -21,7 +21,7 @@ function setup() {
 
     var enzymeWrapper = mount(
         <Provider store={store}>
-            <Main />
+            <Home />
         </Provider>
     );
 
@@ -31,7 +31,7 @@ function setup() {
 }
 
 
-describe('Main component', function () {
+describe('Home component', function () {
     it('should render self and subcomponents', function () {
         var enzymeWrapper = setup(true).enzymeWrapper;
 

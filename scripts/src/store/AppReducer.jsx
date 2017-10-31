@@ -1,35 +1,30 @@
 import * as ACTIONS from '../actions/actionTypes.js';
 
-/**
- * Dump Data
- */
-var initialItems = [
-    { id: 1, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 },
-    { id: 2, name: 'Jacket', description: 'Brand new jacket', price: 75.50 },
-    { id: 3, name: 'Car', description: 'Brand new car', price: 7750 },
-    { id: 4, name: 'Watch', description: 'Brand new watch', price: 110.99 },
-    { id: 5, name: 'Car', description: 'Brand new car', price: 7750 },
-    { id: 6, name: 'Watch', description: 'Brand new watch', price: 110.99 },
-    { id: 7, name: 'Jacket', description: 'Brand new jacket', price: 75.50 },
-    { id: 8, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 },
-];
-/**
- * End of Dump Data
- */
-
 var appReducer = function (state, action) {
     switch (action.type) {
         case ACTIONS.CHANGE_CURRENT_ITEM:
             return Object.assign({}, state, {
-                previewScreenCurrentItem: state.homePageAllItems[action.newItemIndex]
+                previewScreenCurrentItem: action.newItem
             });
         case ACTIONS.TOGGLE_PREVIEW_SCREEN:
             return Object.assign({}, state, {
                 isPreviewScreenShown: action.newState
             });
+        case ACTIONS.ADD_ITEM_TO_ALLITEMS:
+            var newArray = state.allItems.concat(action.itemOrItemsToAdd);
+
+            return Object.assign({}, state, {
+                allItems: newArray
+            });
+        case ACTIONS.UPDATE_ALLITEMS:
+            var newArray = action.newAllItems;
+
+            return Object.assign({}, state, {
+                allItems: newArray
+            });
         default:
             return state || {
-                homePageAllItems: initialItems,
+                allItems: [],
                 previewScreenCurrentItem: {},
                 isPreviewScreenShown: false
             };
@@ -37,4 +32,3 @@ var appReducer = function (state, action) {
 };
 
 export default appReducer;
-export { initialItems };

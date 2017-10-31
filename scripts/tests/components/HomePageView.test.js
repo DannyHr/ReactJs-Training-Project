@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import HomePageView from '../../src/components/HomePageView.jsx';
 
 var storeInitialState = {
-    app: { homePageAllItems: [{ id: 1, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 }] }
+    app: { allItems: [{ id: 1, name: 'Mobile Phone', description: 'Brand new mobile phone', price: 750 }] }
 };
 
 function setup() {

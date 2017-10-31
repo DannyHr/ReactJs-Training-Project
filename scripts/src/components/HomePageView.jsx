@@ -10,13 +10,16 @@ var HomePageView = createReactClass({
     componentDidMount: function () {
         var store = this.context.store;
         var self = this;
-        store.subscribe(function () {
+        this.unsubscribe = store.subscribe(function () {
             self.forceUpdate();
         });
     },
+    componentWillUnmount: function () {
+        this.unsubscribe();
+    },
     render: function () {
         return (
-            <div id='home-page'>
+            <div id='home-page-container' className='page-container'>
                 <ItemsList />
             </div>
         )
