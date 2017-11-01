@@ -3,33 +3,35 @@ import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import CartItem from './CartItem.jsx';
 import { getCartItems, getItem } from '../common/requester.js';
-import { addItemToCart } from '../actions/actionCreators.js';
+import { addItemToCart, logoutUser } from '../actions/actionCreators.js';
 import { Item } from '../models/item.js';
 
 var CartContent = createReactClass({
     contextTypes: {
         store: PropTypes.object
     },
-    componentWillMount: function(){
+    componentWillMount: function () {
         var store = this.context.store;
         var uesrState = store.getState().user;
         var currentUserId = uesrState.currentUser.id;
 
         getCartItems(currentUserId)
-            .then(function(res){
-                res.data.forEach(function(element){
+            .then(function (res) {
+                res.data.forEach(function (element) {
                     getItem(element.itemId)
-                        .then(function(response){
+                        .then(function (response) {
                             var item = response.data[0];
                             store.dispatch(addItemToCart(new Item(item._id, item.name, item.description, item.price)));
                         })
-                        .catch(function(error){
+                        .catch(function (error) {
                             console.log(error);
                         });
                 });
             })
-            .catch(function(err){
-                console.error(err);
+            .catch(function (err) {
+                console.log(err);
+                store.dispatch(logoutUser());
+                this.context.router.history.push('/');
             });
     },
     render: function () {

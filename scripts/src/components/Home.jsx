@@ -5,7 +5,7 @@ import HomePageView from './HomePageView.jsx';
 import ItemPreviewContainer from './ItemPreviewContainer.jsx';
 import PropTypes from 'prop-types';
 import { GLOBALS } from '../common/constants.js';
-import { updateAllItems } from '../actions/actionCreators.js';
+import { updateAllItems, logoutUser } from '../actions/actionCreators.js';
 import { getAllItems } from '../common/requester.js';
 import { Item } from '../models/item.js';
 
@@ -30,7 +30,9 @@ var Home = createReactClass({
                 });
                 store.dispatch(updateAllItems(allItems));
             }).catch(function (err) {
-                console.error(err);
+                console.log(err);
+                store.dispatch(logoutUser());
+                this.context.router.history.push('/');
             });
         }
     },

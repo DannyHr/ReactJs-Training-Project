@@ -32,16 +32,26 @@ var ItemListEntity = createReactClass({
         var self = this;
         var store = self.context.store;
         var userState = store.getState().user;
+        var headerState = store.getState().header;
 
-        addItemToCartPost(userState.currentUser.id, self.props.item.id)
-            .then(function(res){
-                socket.emit('item_added', self.props.item);
-                store.dispatch(addItemToCart(self.props.item));
-            })
-            .catch(function(err){
-                console.error(err);
-            });
+        var itemAlreadyInCart = headerState.itemsInCart.find(function (el) {
+            return el.id === self.props.item.id;
+        });
 
+        if (!itemAlreadyInCart) {
+            store.dispatch(addItemToCart(self.props.item));
+            socket.emit('item_added', self.props.item);
+
+            addItemToCartPost(userState.currentUser.id, self.props.item.id)
+                .then(function (res) {
+                    console.log('Item successfully saved in cart.');
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+        } else {
+            console.log('Item already in cart.');
+        }
     },
     render: function () {
         console.log('Render ItemListEntity');

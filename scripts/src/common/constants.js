@@ -15,7 +15,6 @@ var STRINGS = {
 };
 
 var GLOBALS = {
-    CART_ITEMS: 'cart_items',
     AUTH_TOKEN: 'auth_token',
     AUTH_ID: 'auth_id',
     AUTH_USERNAME: 'auth_username'

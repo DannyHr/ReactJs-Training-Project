@@ -25,8 +25,8 @@ var Authenticator = createReactClass({
             retrieveUser().then(function (response) {
                 store.dispatch(loginUser(new User(response.data._id, response.data.username, authToken)));
             }).catch(function (error) {
-                store.dispatch(logoutUser());
                 console.log(error);
+                store.dispatch(logoutUser());
             });
         } else {
             store.dispatch(logoutUser());

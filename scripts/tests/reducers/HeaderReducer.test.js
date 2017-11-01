@@ -14,32 +14,6 @@ describe('Header Reducer', function () {
         { id: 2, name: 'Car', description: 'Brand new car', price: 7750 }
     ];
 
-    beforeAll(function () {
-        class LocalStorageMock {
-            constructor() {
-                this.store = {};
-            }
-
-            clear() {
-                this.store = {};
-            }
-
-            getItem(key) {
-                return this.store[key] || null;
-            }
-
-            setItem(key, value) {
-                this.store[key] = value.toString();
-            }
-
-            removeItem(key) {
-                delete this.store[key];
-            }
-        };
-
-        global.localStorage = new LocalStorageMock;
-    });
-
     it('should return the initial state', function () {
         expect(headerReducer(undefined, {})).toEqual(initialState);
     });
