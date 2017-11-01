@@ -22,9 +22,22 @@ var appReducer = function (state, action) {
             return Object.assign({}, state, {
                 allItems: newArray
             });
+        case ACTIONS.ADD_TO_SEARCH_RESULTS:
+            var newArray = state.searchResultItems.concat(action.itemsToAdd);
+
+            return Object.assign({}, state, {
+                searchResultItems: newArray
+            });
+        case ACTIONS.CLEAN_SEARCH_RESULTS:
+            var newArray = [];
+
+            return Object.assign({}, state, {
+                searchResultItems: newArray
+            });
         default:
             return state || {
                 allItems: [],
+                searchResultItems: [],
                 previewScreenCurrentItem: {},
                 isPreviewScreenShown: false
             };

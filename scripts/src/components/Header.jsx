@@ -6,6 +6,7 @@ import { STRINGS } from '../common/constants.js';
 import { Link } from 'react-router-dom';
 import { toggleCartContentContainer, logoutUser } from '../actions/actionCreators.js';
 import { logoutUser as logoutUserPost } from '../common/requester.js';
+import SearchField from './SearchField.jsx';
 
 var Header = createReactClass({
     contextTypes: {
@@ -57,35 +58,30 @@ var Header = createReactClass({
                     <h1><Link to="/">{STRINGS.HEADER_WELCOME}</Link></h1>
                     <nav id="header-navigation">
 
-                        {userState.userIsLoggedIn ? 
+                        {userState.userIsLoggedIn ?
                             (
-                                <div id="user-greetings">Welcome, {userState.currentUser.username}!
-                                    &nbsp;<span onClick={this.logout}>Logout</span>
-                                </div>
+                                <span>
+                                    <div id="user-greetings">Welcome, {userState.currentUser.username}!
+                                        &nbsp;<span onClick={this.logout}>{STRINGS.LOGOUT}</span>
+                                    </div>
+                                    <div id="header-search">
+                                        <SearchField />
+                                    </div>
+                                    <div id="cart" onClick={this.toggleCartContentContainer}><i className="fa fa-shopping-cart"></i>
+                                        <div id="cart-content-container" className={'' + (headerState.isCartContentContainerShown ? '' : 'hidden')}>
+                                            <CartContent />
+                                        </div>
+                                    </div>
+                                </span>
                             )
-                            : 
+                            :
                             (
                                 <div id="login-button">
                                     <Link to="/login">
-                                        <span>Login</span>
+                                        <span>{STRINGS.LOGIN}</span>
                                     </Link>
                                 </div>
-                            )}
-
-                        <div id="header-search">
-                            <button id="header-search-button" type="button">
-                                <i className="fa fa-search"></i>
-                            </button>
-                            <input type="text" id="header-search-field" placeholder="Not Implemented Yet" />
-                        </div>
-                        {userState.userIsLoggedIn ? 
-                            (
-                                <div id="cart" onClick={this.toggleCartContentContainer}><i className="fa fa-shopping-cart"></i>
-                                    <div id="cart-content-container" className={'' + (headerState.isCartContentContainerShown ? '' : 'hidden')}>
-                                        <CartContent />
-                                    </div>
-                                </div>
-                            ) : ''
+                            )
                         }
                         <div id="nav-menu"><i className="fa fa-bars"></i></div>
                     </nav>

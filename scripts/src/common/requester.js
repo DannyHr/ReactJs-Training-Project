@@ -94,3 +94,19 @@ export function getCartItems(userId) {
 
     return axios.get(serviceUrl + query, config);
 }
+
+export function searchAllItems(allItems, keyword) {
+    return new Promise(function (resolve, reject) {
+        try {
+            keyword = keyword.toLowerCase();
+            var resultArr = [];
+            resultArr = allItems.filter(function (el) {
+                return el.name.toLowerCase().indexOf(keyword) > -1 || el.description.toLowerCase().indexOf(keyword) > -1;
+            });
+
+            resolve({ data: resultArr });
+        } catch (e) {
+            reject(e);
+        }
+    });
+}

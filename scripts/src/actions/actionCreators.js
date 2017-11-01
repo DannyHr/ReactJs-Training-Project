@@ -61,3 +61,16 @@ export function updateAllItems(newAllItems){
         newAllItems: newAllItems
     };
 }
+
+export function addToSearchResults(itemsToAdd){
+    return {
+        type: ACTIONS.ADD_TO_SEARCH_RESULTS,
+        itemsToAdd: itemsToAdd
+    };
+}
+
+export function cleanSearchResults(){
+    return {
+        type: ACTIONS.CLEAN_SEARCH_RESULTS
+    };
+}
