@@ -205,8 +205,8 @@ h2 {
   text-decoration: none;
 }
 
-#home-page-container .item-add-cart,
-#home-page-container .item-link,
+.page-container .item-add-cart,
+.page-container .item-link,
 #item-preview-item-container .item-add-cart {
   border: 1px solid black;
   padding: 5px;
@@ -223,12 +223,12 @@ h2 {
   cursor: pointer;
 }
 
-#home-page-container .item-link {
+.page-container .item-link {
   bottom: 47px;
 }
 
-#home-page-container .item-add-cart:hover,
-#home-page-container .item-link:hover,
+.page-container .item-add-cart:hover,
+.page-container .item-link:hover,
 #item-preview-item-container .item-add-cart:hover {
   background-color: #E4E4E4;
 }

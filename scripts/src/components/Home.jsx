@@ -34,7 +34,7 @@ var Home = createReactClass({
             });
         }
     },
-    componentDidUpdate: function () {
+    componentWillUpdate: function () {
         var store = this.context.store;
         var userState = store.getState().user;
 
