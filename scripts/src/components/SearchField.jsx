@@ -44,7 +44,7 @@ var SearchField = createReactClass({
                 <button id="header-search-button" type="button" onClick={this.search}>
                     <i className="fa fa-search"></i>
                 </button>
-                <input type="text" id="header-search-field" placeholder={STRINGS.SEARCH} onChange={function (e) {
+                <input type="text" id="header-search-field" placeholder={STRINGS.SEARCH_PLACEHOLDER} onChange={function (e) {
                     var newValue = e.target.value;
                     self.setState({ searchKeyword: newValue });
                 }} />

@@ -10,7 +10,8 @@ var STRINGS = {
     LOGIN: 'Login',
     LOGOUT: 'Logout',
     ALL_PRODUCTS: 'All Products',
-    SEARCH_RESULTS: 'Search Results'
+    SEARCH_RESULTS: 'Search Results',
+    SEARCH_PLACEHOLDER: 'Search products ...'
 };
 
 var GLOBALS = {
