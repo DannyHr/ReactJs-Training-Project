@@ -2,13 +2,16 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import { STRINGS } from '../common/constants.js';
-import { addItemToCart, changeCurrentItem, togglePreviewScreen } from '../actions/actionCreators.js';
+import { addItemToCart, changeCurrentPreviewItem, togglePreviewScreen, changeCurrentProduct } from '../actions/actionCreators.js';
 import { socket } from '../common/sockets.js';
 import { addItemToCart as addItemToCartPost } from '../common/requester.js';
 
 var ItemListEntity = createReactClass({
     contextTypes: {
-        store: PropTypes.object
+        store: PropTypes.object,
+        router: PropTypes.shape({
+            history: PropTypes.object.isRequired,
+        })
     },
     propTypes: {
         item: PropTypes.object.isRequired
@@ -21,14 +24,17 @@ var ItemListEntity = createReactClass({
             store.dispatch(addItemToCart(item));
         });
     },
-    showItemPreview: function () {
+    showItemPreview: function (e) {
+        e.stopPropagation();
+
         var self = this;
         var store = self.context.store;
-        store.dispatch(changeCurrentItem(self.props.item));
+        store.dispatch(changeCurrentPreviewItem(self.props.item));
         store.dispatch(togglePreviewScreen(true));
     },
     addItemToCart: function (e) {
         e.stopPropagation();
+
         var self = this;
         var store = self.context.store;
         var userState = store.getState().user;
@@ -53,17 +59,21 @@ var ItemListEntity = createReactClass({
             console.log('Item already in cart.');
         }
     },
+    goToProductPage: function (e) {
+        e.stopPropagation();
+        this.context.router.history.push('/product/' + this.props.item.id);
+    },
     render: function () {
         console.log('Render ItemListEntity');
 
         return (
             <li className='item'>
-                <span onClick={this.showItemPreview} className='quick-view-link'>
+                <span onClick={this.goToProductPage} className='quick-view-link'>
                     <h3 className='item-name'>{this.props.item.name}</h3>
                     <div className='item-description'>{this.props.item.description}</div>
                     <div className='item-image-container'><img src={this.props.imageSrc || '/images/no-image.png'} /></div>
                     <div className='item-price'>{this.props.item.price.toFixed(2) + ' '}<span className='item-price-currency'>{STRINGS.CURRENCY}</span></div>
-                    <a href={'#product=' + this.props.item.id} className='item-link'>{STRINGS.VIEW_MORE}</a>
+                    <span className='item-link' onClick={this.showItemPreview}>{STRINGS.VIEW_MORE}</span>
                     <span className='item-add-cart' onClick={this.addItemToCart}>{STRINGS.ADD_TO_CART}</span>
                 </span>
             </li >
