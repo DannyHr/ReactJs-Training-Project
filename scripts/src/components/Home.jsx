@@ -17,11 +17,12 @@ var Home = createReactClass({
         })
     },
     componentWillMount: function () {
-        var store = this.context.store;
+        var self = this;
+        var store = self.context.store;
         var userState = store.getState().user;
 
         if (!userState.userIsLoggedIn) {
-            this.context.router.history.push('/login');
+            self.context.router.history.push('/login');
         } else {
             getAllItems().then(function (res) {
                 var allItems = [];
@@ -32,7 +33,7 @@ var Home = createReactClass({
             }).catch(function (err) {
                 console.log(err);
                 store.dispatch(logoutUser());
-                this.context.router.history.push('/');
+                self.context.router.history.push('/');
             });
         }
     },

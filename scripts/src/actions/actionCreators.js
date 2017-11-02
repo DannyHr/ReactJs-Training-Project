@@ -21,9 +21,9 @@ export function toggleCartContentContainer(newState) {
     };
 };
 
-export function changeCurrentItem(newItem) {
+export function changeCurrentPreviewItem(newItem) {
     return {
-        type: ACTIONS.CHANGE_CURRENT_ITEM,
+        type: ACTIONS.CHANGE_CURRENT_PREVIEW_ITEM,
         newItem: newItem
     };
 };
@@ -48,28 +48,28 @@ export function logoutUser() {
     };
 };
 
-export function addItemToAllItems(itemOrItemsToAdd){
+export function addItemToAllItems(itemOrItemsToAdd) {
     return {
         type: ACTIONS.ADD_ITEM_TO_ALLITEMS,
         itemOrItemsToAdd: itemOrItemsToAdd
     };
 }
 
-export function updateAllItems(newAllItems){
+export function updateAllItems(newAllItems) {
     return {
         type: ACTIONS.UPDATE_ALLITEMS,
         newAllItems: newAllItems
     };
 }
 
-export function addToSearchResults(itemsToAdd){
+export function addToSearchResults(itemsToAdd) {
     return {
         type: ACTIONS.ADD_TO_SEARCH_RESULTS,
         itemsToAdd: itemsToAdd
     };
 }
 
-export function cleanSearchResults(){
+export function cleanSearchResults() {
     return {
         type: ACTIONS.CLEAN_SEARCH_RESULTS
     };

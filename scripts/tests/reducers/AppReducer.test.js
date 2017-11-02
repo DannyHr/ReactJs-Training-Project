@@ -13,7 +13,7 @@ describe('App Reducer', function () {
         expect(appReducer(undefined, {})).toEqual(initialState);
     });
 
-    it('should handle CHANGE_CURRENT_ITEM action', function () {
+    it('should handle CHANGE_CURRENT_PREVIEW_ITEM action', function () {
         expect(appReducer(initialState, changeCurrentItem(0))).toEqual({
             allItems: initialItems,
             previewScreenCurrentItem: initialItems[0],

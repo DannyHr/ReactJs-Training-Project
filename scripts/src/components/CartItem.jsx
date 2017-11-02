@@ -27,10 +27,12 @@ var CartItem = createReactClass({
         var userState = store.getState().user;
         var userId = userState.currentUser.id;
 
+        socket.emit('item_removed', self.props.item.id);
+        store.dispatch(removeItemFromCart(self.props.item.id));
+
         deleteItemFromCartPost(userId, self.props.item.id)
             .then(function(res){
-                socket.emit('item_removed', self.props.item.id);
-                store.dispatch(removeItemFromCart(self.props.item.id));
+                console.log('Item removed from cart successfully saved.');
             })
             .catch(function(err){
                 console.log(err);

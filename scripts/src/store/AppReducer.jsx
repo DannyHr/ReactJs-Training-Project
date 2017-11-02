@@ -2,7 +2,7 @@ import * as ACTIONS from '../actions/actionTypes.js';
 
 var appReducer = function (state, action) {
     switch (action.type) {
-        case ACTIONS.CHANGE_CURRENT_ITEM:
+        case ACTIONS.CHANGE_CURRENT_PREVIEW_ITEM:
             return Object.assign({}, state, {
                 previewScreenCurrentItem: action.newItem
             });
