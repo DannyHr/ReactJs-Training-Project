@@ -430,3 +430,7 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
 }
+
+#recaptcha-container > div:first-child {
+  margin: 0 auto 10px;
+}
