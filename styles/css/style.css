@@ -435,9 +435,12 @@ h2 {
   margin: 0 auto 10px;
 }
 
+.notification-container {
+  top: 45px;
+}
+
 .notification-container .notification {
   -webkit-box-shadow: none;
   box-shadow: none;
   opacity: .95;
-  margin-top: 60px;
 }
