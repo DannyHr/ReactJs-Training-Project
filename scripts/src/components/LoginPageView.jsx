@@ -101,11 +101,11 @@ var LoginPageView = createReactClass({
             <div id='login-page-container' className='page-container'>
                 <div id="login-form-container">
                     <h2>{STRINGS.LOGIN_PAGE_TITLE}</h2>
-                    <input type="text" name="username" id="username" placeholder={STRINGS.USERNAME} onChange={function (e) {
+                    <input type="text" name="username" id="username" required="required" placeholder={STRINGS.USERNAME} onChange={function (e) {
                         var newValue = e.target.value;
                         self.setState({ username: newValue });
                     }} />
-                    <input type="password" name="password" id="password" placeholder={STRINGS.PASSWORD} onChange={function (e) {
+                    <input type="password" name="password" id="password" required="required" placeholder={STRINGS.PASSWORD} onChange={function (e) {
                         var newValue = e.target.value;
                         self.setState({ password: newValue });
                     }} />
