@@ -27,6 +27,10 @@ var LoginPageView = createReactClass({
         this.unsubscribe = store.subscribe(function () {
             self.forceUpdate();
         });
+
+        grecaptcha.render(document.getElementById('recaptcha-container'), {
+            'sitekey': '6LcMbDcUAAAAADV5OgAiZah0u7e6kiDlaighUGjm'
+        });
     },
     componentWillUnmount: function () {
         this.unsubscribe();
@@ -85,7 +89,7 @@ var LoginPageView = createReactClass({
                         var newValue = e.target.value;
                         self.setState({ password: newValue });
                     }} />
-                    <div className="g-recaptcha" data-sitekey="6LcMbDcUAAAAADV5OgAiZah0u7e6kiDlaighUGjm"></div>
+                    <div id="recaptcha-container"></div>
                     <button type="submit" onClick={this.login}>{STRINGS.LOGIN}</button>
                 </div>
             </div>
