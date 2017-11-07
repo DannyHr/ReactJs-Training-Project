@@ -28,8 +28,10 @@ var ItemPreviewContainer = createReactClass({
         e.stopPropagation();
         var store = this.context.store;
         var state = store.getState().app;
+        var userState = store.getState().user;
+        var userId = userState.currentUser.id;
 
-        socket.emit('item_added', state.previewScreenCurrentItem);
+        socket.emit('item_added', { roomId: userId, item: state.previewScreenCurrentItem });
 
         store.dispatch(addItemToCart(state.previewScreenCurrentItem));
     },

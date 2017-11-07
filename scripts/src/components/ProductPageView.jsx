@@ -2,8 +2,17 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import { STRINGS } from '../common/constants.js';
+import { socket } from '../common/sockets.js';
+import { addItemToCart } from '../actions/actionCreators.js';
+import { addItemToCart as addItemToCartPost } from '../common/requester.js';
 
 var ProductPageView = createReactClass({
+    contextTypes: {
+        store: PropTypes.object,
+        router: PropTypes.shape({
+            history: PropTypes.object.isRequired,
+        })
+    },
     getDefaultProps: function () {
         return {
             item: null
@@ -17,13 +26,15 @@ var ProductPageView = createReactClass({
         var userState = store.getState().user;
         var headerState = store.getState().header;
 
+        var userId = userState.currentUser.id;
+
         var itemAlreadyInCart = headerState.itemsInCart.find(function (el) {
             return el.id === self.props.item.id;
         });
 
         if (!itemAlreadyInCart) {
             store.dispatch(addItemToCart(self.props.item));
-            socket.emit('item_added', self.props.item);
+            socket.emit('item_added', { roomId: userId, item: self.props.item });
 
             addItemToCartPost(userState.currentUser.id, self.props.item.id)
                 .then(function (res) {

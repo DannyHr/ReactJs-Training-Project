@@ -5,6 +5,7 @@ import { GLOBALS } from '../../src/common/constants.js';
 import { loginUser, logoutUser } from '../actions/actionCreators.js';
 import { retrieveUser } from '../common/requester.js';
 import { User } from '../models/user.js';
+import { socket } from '../common/sockets.js';
 
 var Authenticator = createReactClass({
     contextTypes: {
@@ -24,6 +25,7 @@ var Authenticator = createReactClass({
 
             retrieveUser().then(function (response) {
                 store.dispatch(loginUser(new User(response.data._id, response.data.username, authToken)));
+                socket.emit('joinroom', { roomId: response.data._id });
             }).catch(function (error) {
                 console.log(error);
                 store.dispatch(logoutUser());
