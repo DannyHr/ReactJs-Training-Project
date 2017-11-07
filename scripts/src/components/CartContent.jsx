@@ -11,7 +11,8 @@ var CartContent = createReactClass({
         store: PropTypes.object
     },
     componentWillMount: function () {
-        var store = this.context.store;
+        var self = this;
+        var store = self.context.store;
         var uesrState = store.getState().user;
         var currentUserId = uesrState.currentUser.id;
 
@@ -30,8 +31,8 @@ var CartContent = createReactClass({
             })
             .catch(function (err) {
                 console.log(err);
-                store.dispatch(logoutUser());
-                this.context.router.history.push('/');
+                // store.dispatch(logoutUser());
+                // self.context.router.history.push('/');
             });
     },
     render: function () {
