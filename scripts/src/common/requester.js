@@ -110,3 +110,10 @@ export function searchAllItems(allItems, keyword) {
         }
     });
 }
+
+export function verifyRecaptchaSite(response) {
+    var serviceUrl = '/verify-recaptcha';
+    var query = '?response=' + response;
+
+    return axios.get(serviceUrl + query);
+}

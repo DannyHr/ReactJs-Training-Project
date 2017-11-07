@@ -1,3 +1,5 @@
+import "babel-polyfill";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,10 +15,10 @@ ReactDOM.render(
     <Provider store={appStore}>
         <HashRouter>
             <Authenticator>
-                <Route exact path="/" component={Home}/>
-                <Route path="/login" component={Login}/>
-                <Route path="/search" component={Search}/>
-                <Route path="/product/:id" component={Product}/>
+                <Route exact path="/" component={Home} />
+                <Route path="/login" component={Login} />
+                <Route path="/search" component={Search} />
+                <Route path="/product/:id" component={Product} />
             </Authenticator>
         </HashRouter>
     </Provider>,
