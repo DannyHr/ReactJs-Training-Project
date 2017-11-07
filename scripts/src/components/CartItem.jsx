@@ -5,6 +5,7 @@ import { STRINGS } from '../common/constants.js';
 import { socket } from '../common/sockets.js';
 import { removeItemFromCart } from '../actions/actionCreators.js';
 import { deleteItemFromCart as deleteItemFromCartPost } from '../common/requester.js';
+import { NotificationManager } from 'react-notifications';
 
 var CartItem = createReactClass({
     contextTypes: {
@@ -33,9 +34,11 @@ var CartItem = createReactClass({
         deleteItemFromCartPost(userId, self.props.item.id)
             .then(function (res) {
                 console.log('Item removed from cart successfully saved.');
+                NotificationManager.info('Item removed from cart successfully saved.');
             })
             .catch(function (err) {
                 console.log(err);
+                NotificationManager.success(err.response.data.description);
             });
     },
     render: function () {

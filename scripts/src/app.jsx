@@ -11,10 +11,13 @@ import Product from './components/Product.jsx';
 import Authenticator from './components/Authenticator.jsx';
 import { HashRouter, Route } from 'react-router-dom';
 
+import { NotificationContainer } from 'react-notifications';
+
 ReactDOM.render(
     <Provider store={appStore}>
         <HashRouter>
             <Authenticator>
+                <NotificationContainer />
                 <Route exact path="/" component={Home} />
                 <Route path="/login" component={Login} />
                 <Route path="/search" component={Search} />

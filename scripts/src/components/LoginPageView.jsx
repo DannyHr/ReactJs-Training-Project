@@ -7,6 +7,8 @@ import { loginUser as loginUserPost, verifyRecaptchaSite } from '../common/reque
 import { User } from '../models/user.js';
 import { STRINGS } from '../common/constants.js';
 import { socket } from '../common/sockets.js';
+import Recaptcha from 'react-gcaptcha';
+import { NotificationManager } from 'react-notifications';
 
 var LoginPageView = createReactClass({
     contextTypes: {
@@ -18,7 +20,9 @@ var LoginPageView = createReactClass({
     getInitialState: function () {
         return {
             username: '',
-            password: ''
+            password: '',
+            recaptchaUserResponse: '',
+            recaptchaResetNum: 0
         };
     },
     componentDidMount: function () {
@@ -26,10 +30,6 @@ var LoginPageView = createReactClass({
         var store = self.context.store;
         this.unsubscribe = store.subscribe(function () {
             self.forceUpdate();
-        });
-
-        grecaptcha.render(document.getElementById('recaptcha-container'), {
-            'sitekey': '6LcMbDcUAAAAADV5OgAiZah0u7e6kiDlaighUGjm'
         });
     },
     componentWillUnmount: function () {
@@ -39,7 +39,7 @@ var LoginPageView = createReactClass({
         var self = this;
         var store = self.context.store;
 
-        var userResponse = grecaptcha.getResponse();
+        var userResponse = self.state.recaptchaUserResponse;
 
         if (userResponse) {
             verifyRecaptchaSite(userResponse)
@@ -57,23 +57,43 @@ var LoginPageView = createReactClass({
                                 store.dispatch(loginUser(new User(response.data._id, response.data.username, response.data._kmd.authtoken)));
                                 socket.emit('joinroom', { roomId: response.data._id });
                                 self.context.router.history.push('/');
+                                NotificationManager.success('Logged in successfully!');
                             } else {
                                 console.warn(response.data.code || response.status);
                             }
                         }).catch(function (loginError) {
                             console.log('Unsuccessful login: ' + loginError.response.data.description);
-                            grecaptcha.reset();
+                            NotificationManager.error(loginError.response.data.description, 'Unsuccessful login');
+                            self.resetCaptcha();
                         });
                     } else {
                         console.log('Unsuccessful recaptcha verification: ' + recaptchaResponse.data['error-codes'].join(', '));
+                        NotificationManager.error(recaptchaResponse.data['error-codes'].join(', '), 'Unsuccessful reCAPTCHA verification');
                     }
                 })
                 .catch(function (recaptchaError) {
                     console.log('Unsuccessful recaptcha: ' + recaptchaError.description);
+                    NotificationManager.error(recaptchaError.description, 'Unsuccessful reCAPTCHA verification');
+
                 });
         } else {
             console.log('Please verify you are not a robot.');
+            NotificationManager.warning('Please verify you are not a robot using reCAPTCHA!');
         }
+    },
+    verifyCallback: function (userResponse) {
+        this.setState(function () {
+            return {
+                recaptchaUserResponse: userResponse
+            };
+        });
+    },
+    resetCaptcha: function () {
+        var self = this;
+        self.setState({ 
+            recaptchaResetNum: self.state.recaptchaResetNum + 1,
+            recaptchaUserResponse: ''
+        });
     },
     render: function () {
         var self = this;
@@ -89,7 +109,12 @@ var LoginPageView = createReactClass({
                         var newValue = e.target.value;
                         self.setState({ password: newValue });
                     }} />
-                    <div id="recaptcha-container"></div>
+                    <Recaptcha
+                        sitekey="6LcMbDcUAAAAADV5OgAiZah0u7e6kiDlaighUGjm"
+                        onloadCallbackName='voidFunction'
+                        verifyCallback={self.verifyCallback}
+                        reset={self.state.recaptchaResetNum || 0}
+                    />
                     <button type="submit" onClick={this.login}>{STRINGS.LOGIN}</button>
                 </div>
             </div>

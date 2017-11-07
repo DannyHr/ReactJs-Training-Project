@@ -5,6 +5,7 @@ import { STRINGS } from '../common/constants.js';
 import { socket } from '../common/sockets.js';
 import { addItemToCart } from '../actions/actionCreators.js';
 import { addItemToCart as addItemToCartPost } from '../common/requester.js';
+import { NotificationManager } from 'react-notifications';
 
 var ProductPageView = createReactClass({
     contextTypes: {
@@ -39,12 +40,15 @@ var ProductPageView = createReactClass({
             addItemToCartPost(userState.currentUser.id, self.props.item.id)
                 .then(function (res) {
                     console.log('Item successfully saved in cart.');
+                    NotificationManager.success('Item successfully saved in cart.');
                 })
                 .catch(function (err) {
                     console.error(err);
+                    NotificationManager.success(err.response.data.description);
                 });
         } else {
             console.log('Item already in cart.');
+            NotificationManager.warning('This item is already in cart.');            
         }
     },
     render: function () {

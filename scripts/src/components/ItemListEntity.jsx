@@ -5,6 +5,7 @@ import { STRINGS } from '../common/constants.js';
 import { addItemToCart, changeCurrentPreviewItem, togglePreviewScreen, changeCurrentProduct } from '../actions/actionCreators.js';
 import { socket } from '../common/sockets.js';
 import { addItemToCart as addItemToCartPost } from '../common/requester.js';
+import { NotificationManager } from 'react-notifications';
 
 var ItemListEntity = createReactClass({
     contextTypes: {
@@ -53,12 +54,15 @@ var ItemListEntity = createReactClass({
             addItemToCartPost(userState.currentUser.id, self.props.item.id)
                 .then(function (res) {
                     console.log('Item successfully saved in cart.');
+                    NotificationManager.info('Item successfully saved in cart.');
                 })
                 .catch(function (err) {
                     console.error(err);
+                    NotificationManager.success(err.response.data.description);
                 });
         } else {
-            console.log('Item already in cart.');
+            console.log('This item is already in cart.');
+            NotificationManager.warning('This item is already in cart.');
         }
     },
     goToProductPage: function (e) {

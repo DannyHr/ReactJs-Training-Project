@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { toggleCartContentContainer, logoutUser } from '../actions/actionCreators.js';
 import { logoutUser as logoutUserPost } from '../common/requester.js';
 import SearchField from './SearchField.jsx';
+import { NotificationManager } from 'react-notifications';
 
 var Header = createReactClass({
     contextTypes: {
@@ -41,8 +42,10 @@ var Header = createReactClass({
             console.log(response);
             store.dispatch(logoutUser());
             self.context.router.history.push('/?logout');
+            NotificationManager.success('Logged out successfully!');
         }).catch(function (error) {
             console.log(error);
+            NotificationManager.error(error.response.data.description, 'Unsuccessful logout!');            
         });
     },
     render: function () {

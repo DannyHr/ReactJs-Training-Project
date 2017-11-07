@@ -431,6 +431,12 @@ h2 {
   transform: translateX(-50%);
 }
 
-#recaptcha-container > div:first-child {
+#g-recaptcha > div:first-child {
   margin: 0 auto 10px;
+}
+
+.notification-container .notification {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .95;
 }
