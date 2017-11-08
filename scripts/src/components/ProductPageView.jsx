@@ -48,24 +48,48 @@ var ProductPageView = createReactClass({
                 });
         } else {
             console.log('Item already in cart.');
-            NotificationManager.warning('This item is already in cart.');            
+            NotificationManager.warning('This item is already in cart.');
         }
     },
     render: function () {
         var currentProduct = this.props.item;
         console.log(currentProduct);
         if (currentProduct) {
+            var descriptionParagraphs = [];
+            if (Array.isArray(currentProduct.longDescription)) {
+                descriptionParagraphs = currentProduct.longDescription.map(function (element, index) {
+                    return (
+                        <p key={index}>{element}</p>
+                    );
+                });
+            } else {
+                descriptionParagraphs.push(<p>{currentProduct.longDescription}</p>);
+            }
+
             return (
                 <div id='product-page-container' className='page-container'>
                     <h3 className='item-name'>{currentProduct.name}</h3>
-                    <div className='item-image-container'>
-                        <a href={currentProduct.imageSrc || '/images/no-image.png'}>
-                            <img src={currentProduct.imageSrc || '/images/no-image.png'} />
-                        </a>
+                    <div className='date-created'>Added {currentProduct.dateCreated.toLocaleDateString('bg-BG')}&nbsp;</div>
+                    <div className='date-modified'>Last modified {currentProduct.dateModified.toLocaleDateString('bg-BG')}</div>
+                    <div className='content-container'>
+                        <div className='item-image-container'>
+                            <a href={currentProduct.imageSrc || '/images/no-image.png'}>
+                                <img src={currentProduct.imageSrc || '/images/no-image.png'} />
+                            </a>
+                        </div>
+                        <div className='item-description'>{descriptionParagraphs}</div>
+                        <div className='bottom-container'>
+                            <div className='item-price'>
+                                {currentProduct.price.toFixed(2) + ' '}
+                                <span className='item-price-currency'>{STRINGS.CURRENCY}</span>
+                            </div>
+                            <span className='item-add-cart' onClick={this.addItemToCart}>{STRINGS.ADD_TO_CART}</span>
+                            {currentProduct.tags ?
+                                <div className='item-tags'>Tags: {currentProduct.tags.join(', ')}</div>
+                                : ''
+                            }
+                        </div>
                     </div>
-                    <div className='item-description'>{currentProduct.description}</div>
-                    <div className='item-price'>{currentProduct.price.toFixed(2) + ' '}<span className='item-price-currency'>{STRINGS.CURRENCY}</span></div>
-                    <span className='item-add-cart' onClick={this.addItemToCart}>{STRINGS.ADD_TO_CART}</span>
                 </div>
             );
         } else {

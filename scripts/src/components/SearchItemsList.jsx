@@ -6,7 +6,19 @@ import { STRINGS } from '../common/constants.js';
 
 var SearchItemsList = createReactClass({
     contextTypes: {
-        store: PropTypes.object
+        store: PropTypes.object,
+        router: PropTypes.shape({
+            history: PropTypes.object.isRequired,
+        })
+    },
+    componentWillMount: function () {
+        var self = this;
+        var store = self.context.store;
+        var state = store.getState().app;
+
+        if (!state.searchResultItems || !state.searchResultItems.length) {
+            self.context.router.history.push('/login');
+        }
     },
     render: function () {
         var store = this.context.store;

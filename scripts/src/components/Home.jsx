@@ -27,7 +27,11 @@ var Home = createReactClass({
             getAllItems().then(function (res) {
                 var allItems = [];
                 res.data.forEach(function (item) {
-                    allItems.push(new Item(item._id, item.name, item.description, item.price));
+                    var dateCreated = new Date(item._kmd.ect);
+                    var dateModified = new Date(item._kmd.lmt);
+
+                    allItems.push(new Item(item._id, item.name, item.description, item.long_description,
+                        item.price, null, dateCreated, dateModified, item.tags));
                 });
                 store.dispatch(updateAllItems(allItems));
             }).catch(function (err) {

@@ -33,8 +33,14 @@ var Product = createReactClass({
         getItem(id)
             .then(function (res) {
                 console.log(res);
-                var item = res.data[0]
-                self.setState({ currentItem: new Item(item._id, item.name, item.description, item.price) });
+                var item = res.data[0];
+                var dateCreated = new Date(item._kmd.ect);
+                var dateModified = new Date(item._kmd.lmt);
+
+                self.setState({
+                    currentItem: new Item(item._id, item.name, item.description, item.long_description,
+                        item.price, null, dateCreated, dateModified, item.tags)
+                });
             })
             .catch(function (err) {
                 console.log(err);

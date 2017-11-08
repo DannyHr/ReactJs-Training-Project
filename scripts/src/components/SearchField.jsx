@@ -41,12 +41,16 @@ var SearchField = createReactClass({
 
         return (
             <span>
-                <button id="header-search-button" type="button" onClick={this.search}>
+                <button id="header-search-button" type="button" onClick={self.search}>
                     <i className="fa fa-search"></i>
                 </button>
                 <input type="text" id="header-search-field" placeholder={STRINGS.SEARCH_PLACEHOLDER} onChange={function (e) {
                     var newValue = e.target.value;
                     self.setState({ searchKeyword: newValue });
+                }} onKeyPress={function (event) {
+                    if (event.key == 'Enter') {
+                        self.search();
+                    }
                 }} />
             </span>
         )

@@ -22,7 +22,14 @@ var CartContent = createReactClass({
                     getItem(element.itemId)
                         .then(function (response) {
                             var item = response.data[0];
-                            store.dispatch(addItemToCart(new Item(item._id, item.name, item.description, item.price)));
+                            var dateCreated = new Date(item._kmd.ect);
+                            var dateModified = new Date(item._kmd.lmt);
+                            store.dispatch(
+                                addItemToCart(
+                                    new Item(item._id, item.name, item.description, item.long_description,
+                                        item.price, null, dateCreated, dateModified, item.tags)
+                                )
+                            );
                         })
                         .catch(function (error) {
                             console.log(error);

@@ -101,7 +101,16 @@ export function searchAllItems(allItems, keyword) {
             keyword = keyword.toLowerCase();
             var resultArr = [];
             resultArr = allItems.filter(function (el) {
-                return el.name.toLowerCase().indexOf(keyword) > -1 || el.description.toLowerCase().indexOf(keyword) > -1;
+                var currentItemLongDescriptionStr = '';
+
+                if (Array.isArray(el.longDescription)) {
+                    currentItemLongDescriptionStr = el.longDescription.join(' ').toLowerCase();
+                } else {
+                    currentItemLongDescriptionStr = el.longDescription.toLowerCase();
+                }
+
+                return el.name.toLowerCase().indexOf(keyword) > -1 || el.description.toLowerCase().indexOf(keyword) > -1 ||
+                    currentItemLongDescriptionStr.indexOf(keyword) > -1 || el.tags.indexOf(keyword) > -1;
             });
 
             resolve({ data: resultArr });
